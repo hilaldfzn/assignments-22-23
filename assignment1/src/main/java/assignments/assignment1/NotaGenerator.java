@@ -38,7 +38,7 @@ public class NotaGenerator {
                     String phoneNum = sc.nextLine();
 
                     // Jika input bukan digit angka, maka akan mencetak pesan dan kembali meminta input hingga sesuai
-                    while (!isValidPhoneNum(phoneNum)) {
+                    while (!isValidInput(phoneNum)) {
                         System.out.println("Nomor hp hanya menerima digit");
                         phoneNum = sc.nextLine();
                     }
@@ -55,7 +55,7 @@ public class NotaGenerator {
                     System.out.println("Masukkan nomor handphone Anda: "); // Input nomor handphone
                     phoneNum = sc.nextLine();
                     
-                    while (!isValidPhoneNum(phoneNum)) {
+                    while (!isValidInput(phoneNum)) {
                         System.out.println("Nomor hp hanya menerima digit");
                         phoneNum = sc.nextLine();
                     }
@@ -72,9 +72,9 @@ public class NotaGenerator {
                         /* Program tidak akan mengeluarkan pesan error jika
                          * input jenis paket yang dipilih sesuai dengan
                          * express, fast, reguler */
-                        if (paketLaundry.equalsIgnoreCase("express") || 
-                            paketLaundry.equalsIgnoreCase("fast") || 
-                            paketLaundry.equalsIgnoreCase("reguler")) {
+                        if (paketLaundry.equalsIgnoreCase("Express") || 
+                            paketLaundry.equalsIgnoreCase("Fast") || 
+                            paketLaundry.equalsIgnoreCase("Reguler")) {
                             break;
                         } else if (paketLaundry.equals("?")) {
                             // Input "?" akan menampilkan paket yang tersedia lalu kembali meminta input
@@ -109,7 +109,6 @@ public class NotaGenerator {
                              */   
                             } else if (beratCucian <= 0) {
                                 System.out.println("Harap masukkan berat cucian Anda dalam bentuk bilangan positif.");
-                                sc.nextLine();
                             
                             // Program akan berjalan normal jika berat cucian >= 2 kg
                             } else {
@@ -156,10 +155,14 @@ public class NotaGenerator {
     }
 
     // Method untuk mengecek apakah input nomor handphone berupa angka atau bukan
-    public static boolean isValidPhoneNum(String nomorHP) {
-        for (int i = 0; i < nomorHP.length(); i++) {
-            if(!Character.isDigit(nomorHP.charAt(i)))
-                return false;
+    public static boolean isValidInput(String input) {
+        if (input.equalsIgnoreCase("")) {
+            return false;
+        } else {
+            for (int i = 0; i < input.length(); i++) {
+                if(!Character.isDigit(input.charAt(i)))
+                    return false;
+            }
         }
         return true;
     }
@@ -215,13 +218,13 @@ public class NotaGenerator {
     // Method untuk membuat Nota.
     public static String generateNota(String id, String paket, int berat, String tanggalTerima) {
         int waktuCuci = 0, biayaPaket = 0;
-        if (paket.equals("reguler")) {
+        if (paket.equals("Reguler")) {
             waktuCuci = 3;                             // Paket reguler, pengerjaan 3 hari dan harganya 7000/kg
             biayaPaket = 7000;
-        } else if (paket.equals("fast")) {
+        } else if (paket.equals("Fast")) {
             waktuCuci = 2;                             // Paket fast, pengerjaan 2 hari dan harganya 10000/kg
             biayaPaket = 10000;
-        } else if (paket.equals("express")) {
+        } else if (paket.equals("Express")) {
             waktuCuci = 1;                             // Paket express, pengerjaan 1 hari dan harganya 12000/kg
             biayaPaket = 12000;
         }
