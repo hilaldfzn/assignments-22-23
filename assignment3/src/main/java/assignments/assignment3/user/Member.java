@@ -30,7 +30,14 @@ public class Member {
      * @param nota Nota object untuk ditambahkan.
      */
     public void addNota(Nota nota) {
-        // TODO
+        Nota[] tempNotaList = new Nota[notaList.length + 1];
+
+        for (int i = 0; i < notaList.length; i++) {
+            tempNotaList[i] = notaList[i];
+        }
+
+        this.notaList = tempNotaList;
+        tempNotaList[this.notaList.length - 1] = nota;
     }
 
     /**
@@ -40,8 +47,7 @@ public class Member {
      * @return true jika ID dan password sesuai dengan instance member, false jika tidak.
      */
     protected boolean authenticate(String password) {
-        // TODO
-        return false;
+        return password.equals(this.password);
     }
 
     // Dibawah ini adalah getter

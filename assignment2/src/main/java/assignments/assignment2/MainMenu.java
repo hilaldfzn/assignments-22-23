@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import static assignments.assignment1.NotaGenerator.*;
 
+// Implementasi visibility modifier yang sesuai dan inisialisasi variable yang akan digunakan
 public class MainMenu {
-    // Implementasi visibility modifier yang sesuai dan inisialisasi variable yang akan digunakan
     private static final Scanner input = new Scanner(System.in);
     private static SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
     private static Calendar cal = Calendar.getInstance();
@@ -82,9 +82,9 @@ public class MainMenu {
     }
 
     private static void handleGenerateNota() {
-        // Inisiasi variable
-        boolean isNumeric = false;
+        // Inisialisasi local variable
         int idxMember = 0, bonusCounter = 0;
+        boolean isNumeric = false;
         String beratCucian;
 
         System.out.println("Masukan ID member:");               
@@ -167,17 +167,16 @@ public class MainMenu {
             }
         } while (!isNumeric);
 
+        // Mengkonversi tipe data cucian menjadi int dan membuat objek nota
         int berat = Integer.valueOf(beratCucian);
-        
-        // Membuat objek nota
         Nota nota = new Nota(memberList.get(idxMember), paketLaundry, berat, fmt.format(cal.getTime()));
         nota.setSisaHariPengerjaan(lamaPengerjaan);
 
+        // Mencetak nota dan menambahkan ke list nota
         System.out.println("Berhasil menambahkan nota!");
         MainMenu.incrementNotaId();
         System.out.println(nota.generateNota(memberList.get(idxMember), paketLaundry, berat, fmt.format(cal.getTime()), bonusCounter));
         notaList.add(nota);
-        //nota.getMember().getBonusCounter();
     }
 
     // Method untuk menghitung banyak nota dan melihat status dari cucian
@@ -203,7 +202,8 @@ public class MainMenu {
      * pengecekan apakah cucian sudah dapat diambil atau belum
      */
     private static void handleAmbilCucian() {
-        String inNota = "";
+        String inNota = ""; String status = "";
+        
         System.out.println("Masukan ID nota yang akan diambil: ");
         inNota = input.nextLine();
 
@@ -215,8 +215,6 @@ public class MainMenu {
                 break;
             }
         } while (true);
-
-        String status = "";
 
         if (findIdNota(inNota) != null) {
             if (findNotaIdx(inNota) != -1) {

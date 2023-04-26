@@ -1,6 +1,7 @@
 package assignments.assignment3.user.menu;
 
 import assignments.assignment3.nota.Nota;
+import assignments.assignment3.nota.service.LaundryService;
 import assignments.assignment3.user.Employee;
 import assignments.assignment3.user.Member;
 
@@ -12,7 +13,7 @@ public class EmployeeSystem extends SystemCLI {
      * Membuat object baru EmployeeSystem dan mendaftarkan Employee pada CuciCuci
      */
     public EmployeeSystem() {
-        memberList = new Member[]{
+        memberList = new Member[] {
                 new Employee("Dek Depe", "akuDDP"),
                 new Employee("Depram", "musiktualembut"),
                 new Employee("Lita Duo", "gitCommitPush"),
@@ -29,7 +30,12 @@ public class EmployeeSystem extends SystemCLI {
     @Override
     protected boolean processChoice(int choice) {
         boolean logout = false;
-        // TODO:
+        switch (choice) {
+            case 1 -> processNyuciTime();
+            case 2 -> displayListNota();
+            case 3 -> logout = true;
+            default -> System.out.println("Pilihan tidak valid, silakan coba lagi.");
+        }
         return logout;
     }
 
@@ -41,5 +47,45 @@ public class EmployeeSystem extends SystemCLI {
         System.out.println("1. It's nyuci time");
         System.out.println("2. Display List Nota");
         System.out.println("3. Logout");
+    }
+
+    private void processNyuciTime() {
+        // TODO
+        boolean allNotaDone = false;
+        if (notaList.length != 0) {
+            System.out.printf("Stand back! %s beginning to nyuci!\n", loginMember.getNama());
+
+            for (Nota nota : notaList) {
+                for (LaundryService service : nota.getServices()) {
+                    if (service.isDone() == false) {
+                        System.out.printf("Nota %d : %s\n", nota.getId(), service.doWork());
+                        allNotaDone = false;
+                        break;
+                    } else {
+                        allNotaDone = true;
+                    }
+                }
+                nota.setNotaStatus();
+                if (allNotaDone == true) {
+                    System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
+                    continue;
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    private void displayListNota() {
+        // TODO
+        if (notaList.length != 0) {
+            for (Nota nota : notaList) {
+                if (nota.isDone() == true) {
+                    System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
+                } else {
+                    System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
+                }
+            }
+            System.out.println();
+        }
     }
 }

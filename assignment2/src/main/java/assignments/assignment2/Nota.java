@@ -114,12 +114,4 @@ public class Nota {
     public void setReady(boolean isReady) {
         this.isReady = isReady;
     }
-    // 
-    public boolean checkNextDay(int sisaHariPengerjaan) {
-        sisaHariPengerjaan--;
-        if (sisaHariPengerjaan <= 0) {
-            return true;
-        }
-        return false;
-    }
 }

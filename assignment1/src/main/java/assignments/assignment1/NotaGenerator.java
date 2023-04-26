@@ -218,13 +218,13 @@ public class NotaGenerator {
     // Method untuk membuat Nota.
     public static String generateNota(String id, String paket, int berat, String tanggalTerima) {
         int waktuCuci = 0, biayaPaket = 0;
-        if (paket.equals("Reguler")) {
+        if (paket.equals("reguler")) {
             waktuCuci = 3;                             // Paket reguler, pengerjaan 3 hari dan harganya 7000/kg
             biayaPaket = 7000;
-        } else if (paket.equals("Fast")) {
+        } else if (paket.equals("fast")) {
             waktuCuci = 2;                             // Paket fast, pengerjaan 2 hari dan harganya 10000/kg
             biayaPaket = 10000;
-        } else if (paket.equals("Express")) {
+        } else if (paket.equals("express")) {
             waktuCuci = 1;                             // Paket express, pengerjaan 1 hari dan harganya 12000/kg
             biayaPaket = 12000;
         }

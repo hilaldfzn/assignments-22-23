@@ -11,8 +11,13 @@ public class NotaManager {
     /**
      * Skips ke hari berikutnya dan update semua entri nota yang sesuai.
      */
-    public static void toNextDay(){
+    public static void toNextDay() {
         //TODO: implement skip hari
+        cal.add(Calendar.DATE, 1);
+
+        for (Nota nota : notaList) {
+            nota.toNextDay();
+        }
     }
 
     /**
@@ -20,7 +25,15 @@ public class NotaManager {
      *
      * @param nota Nota object untuk ditambahkan.
      */
-    public static void addNota(Nota nota){
+    public static void addNota(Nota nota) {
         //TODO: implement add nota
+        Nota[] tempNotaList = new Nota[notaList.length + 1];
+
+        for (int i = 0; i < notaList.length; i++) {
+            tempNotaList[i] = notaList[i];
+        }
+
+        notaList = tempNotaList;
+        tempNotaList[notaList.length - 1] = nota;
     }
 }

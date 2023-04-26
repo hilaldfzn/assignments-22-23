@@ -21,11 +21,11 @@ public class LoginManager {
      * @param id -> ID dari user yang akan menggunakan SystemCLI
      * @return SystemCLI object yang sesuai dengan ID, null if  ID tidak ditemukan.
      */
-    public SystemCLI getSystem(String id){
-        if(memberSystem.isMemberExist(id)){
+    public SystemCLI getSystem(String id) { 
+        if (memberSystem.isMemberExist(id)) {
             return memberSystem;
         }
-        if(employeeSystem.isMemberExist(id)){
+        if (employeeSystem.isMemberExist(id)) {
             return employeeSystem;
         }
         return null;
@@ -39,8 +39,12 @@ public class LoginManager {
      * @param password -> Password akun member.
      * @return Member object yang berhasil mendaftar, return null jika gagal mendaftar.
      */
-    public Member register(String nama, String noHp, String password) {
-        // TODO
+    public Member register(String nama, String noHp, String password) {   
+        Member member = new Member(nama, NotaGenerator.generateId(nama, noHp), password);   
+        if (!memberSystem.isMemberExist(member.getId())) {
+            memberSystem.addMember(member);
+            return member;
+        }
         return null;
     }
 }

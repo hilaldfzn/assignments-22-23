@@ -36,12 +36,15 @@ public class Member {
         this.noHp = noHp;
     }
 
-    public void resetBonusCounter() {
-        this.bonusCounter = 0;
-    }
-
     public int getBonusCounter() {
         return bonusCounter += 1;
     }
 
+    public void checkBonusCounter(int bonusCounter) {
+        if (bonusCounter == 3) {
+            bonusCounter = 0;
+        } else {
+            getBonusCounter();
+        }
+    }
 }

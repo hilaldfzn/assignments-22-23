@@ -22,12 +22,12 @@ public abstract class SystemCLI {
 
         if (authMember != null) {
             this.in = in;
-            System.out.println("Login successful!");
+            System.out.println("Login successful!\n");
             run(in, authMember);
             return;
         }
 
-        System.out.println("Invalid ID or password.");
+        System.out.println("Invalid ID or password.\n");
     };
 
     /**
@@ -46,7 +46,7 @@ public abstract class SystemCLI {
             logout = processChoice(choice);
         }
         loginMember = null;
-        System.out.println("Logging out...");
+        System.out.println("Logging out...\n");
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class SystemCLI {
             if (!user.getId().equals(id)) {
                 continue;
             }
-            if(user.login(id, pass)){
+            if (user.login(id, pass)) {
                 return user;
             }
             return null;
@@ -76,9 +76,8 @@ public abstract class SystemCLI {
      * @return true jika ada member dengan ID yang diberikan, false jika tidak.
      */
     public boolean isMemberExist(String id){
-        for (Member member:
-                memberList) {
-            if(member.getId().equals(id)){
+        for (Member member : memberList) {
+            if (member.getId().equals(id)) {
                 return true;
             }
         }
@@ -88,8 +87,8 @@ public abstract class SystemCLI {
     /**
      * Displays main menu untuk user yang menggunakan sistem.
      */
-    protected void displayMenu(){
-        System.out.printf("\nLogin as : %s\nSelamat datang %s!\n\n", loginMember.getId(), loginMember.getNama());
+    protected void displayMenu() {
+        System.out.printf("Login as : %s\nSelamat datang %s!\n\n", loginMember.getId(), loginMember.getNama());
         displaySpecificMenu();
         System.out.print("Apa yang ingin Anda lakukan hari ini? ");
     }
