@@ -22,7 +22,6 @@ public class MemberSystem extends SystemCLI {
             case 3 -> logout = true;
             default -> System.out.println("Pilihan tidak valid, silakan coba lagi.");
         }
-        
         return logout;
     }
 

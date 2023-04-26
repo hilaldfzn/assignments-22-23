@@ -5,20 +5,17 @@ public class CuciService implements LaundryService {
 
     @Override
     public String doWork() {
-        // TODO
         isDone = true;
         return "Sedang mencuci...";
     }
 
     @Override
     public boolean isDone() {
-        // TODO
         return isDone;
     }
 
     @Override
     public long getHarga(int berat) {
-        // TODO
         return 0;
     }
 

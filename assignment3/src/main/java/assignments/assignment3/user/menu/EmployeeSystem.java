@@ -50,7 +50,6 @@ public class EmployeeSystem extends SystemCLI {
     }
 
     private void processNyuciTime() {
-        // TODO
         boolean allNotaDone = false;
         if (notaList.length != 0) {
             System.out.printf("Stand back! %s beginning to nyuci!\n", loginMember.getNama());
@@ -76,7 +75,6 @@ public class EmployeeSystem extends SystemCLI {
     }
 
     private void displayListNota() {
-        // TODO
         if (notaList.length != 0) {
             for (Nota nota : notaList) {
                 if (nota.isDone() == true) {

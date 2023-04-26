@@ -3,8 +3,6 @@ import assignments.assignment1.NotaGenerator;
 import assignments.assignment3.nota.service.LaundryService;
 import assignments.assignment3.user.Member;
 
-//import static assignments.assignment3.nota.NotaManager.*;
-
 public class Nota {
     private Member member;
     private String paket;
@@ -44,12 +42,10 @@ public class Nota {
     }
 
     public String kerjakan() {
-        // TODO
         return "";
     }
     
     public void toNextDay() {
-        // TODO
         if (isDone == false) {
             sisaHariPengerjaan--;
             if (sisaHariPengerjaan < 0) {
@@ -63,7 +59,6 @@ public class Nota {
     }
 
     public String getNotaStatus() {
-        // TODO
         if (isDone == false) {
             return "Belum selesai.";
         }
