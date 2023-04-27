@@ -51,7 +51,7 @@ public class MemberSystem extends SystemCLI {
         tempMemberList[memberList.length - 1] = member;
     }
     
-    private void processLaundryRequest() {
+    protected void processLaundryRequest() {
         System.out.println("Masukan paket laundry:");
         System.out.println("+-------------Paket-------------+");
         System.out.println("| Express | 1 Hari | 12000 / Kg |");
@@ -91,7 +91,7 @@ public class MemberSystem extends SystemCLI {
         loginMember.addNota(nota);
     }
 
-    private void processDetailNota() {
+    protected void processDetailNota() {
         for (Nota nota : loginMember.getNotaList()) {
             System.out.println(nota.toString());
         }

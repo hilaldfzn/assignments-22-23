@@ -42,11 +42,23 @@ public class Nota {
     }
 
     public String kerjakan() {
+        boolean allNotaDone = false;
+        for (LaundryService service : services) {
+            if (!service.isDone()) {
+                allNotaDone = false;
+                return service.doWork();
+            } else {
+                allNotaDone = true;
+            }
+        }
+        if (allNotaDone) {
+            return getNotaStatus();
+        }
         return "";
     }
     
     public void toNextDay() {
-        if (isDone == false) {
+        if (!isDone) {
             sisaHariPengerjaan--;
             if (sisaHariPengerjaan < 0) {
                 this.daysLate += 1;
@@ -59,7 +71,7 @@ public class Nota {
     }
 
     public String getNotaStatus() {
-        if (isDone == false) {
+        if (!isDone) {
             return "Belum selesai.";
         }
         return "Sudah selesai.";
@@ -67,7 +79,7 @@ public class Nota {
 
     public void setNotaStatus() {
         for(LaundryService service : services) {
-            if (service.isDone() == true) this.isDone = true;
+            if (service.isDone()) this.isDone = true;
             else this.isDone = false;
         }
     }

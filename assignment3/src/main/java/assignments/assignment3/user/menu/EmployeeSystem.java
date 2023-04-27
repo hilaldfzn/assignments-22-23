@@ -1,7 +1,6 @@
 package assignments.assignment3.user.menu;
 
 import assignments.assignment3.nota.Nota;
-import assignments.assignment3.nota.service.LaundryService;
 import assignments.assignment3.user.Employee;
 import assignments.assignment3.user.Member;
 
@@ -49,41 +48,28 @@ public class EmployeeSystem extends SystemCLI {
         System.out.println("3. Logout");
     }
 
-    private void processNyuciTime() {
-        boolean allNotaDone = false;
+    protected void processNyuciTime() {
         if (notaList.length != 0) {
             System.out.printf("Stand back! %s beginning to nyuci!\n", loginMember.getNama());
-
+    
             for (Nota nota : notaList) {
-                for (LaundryService service : nota.getServices()) {
-                    if (service.isDone() == false) {
-                        System.out.printf("Nota %d : %s\n", nota.getId(), service.doWork());
-                        allNotaDone = false;
-                        break;
-                    } else {
-                        allNotaDone = true;
-                    }
-                }
+                System.out.printf("Nota %d : %s\n", nota.getId(), nota.kerjakan());
                 nota.setNotaStatus();
-                if (allNotaDone == true) {
-                    System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
-                    continue;
-                }
             }
+        } else {
+            System.out.println("Belum ada nota di dalam sistem!\n");
         }
         System.out.println();
     }
 
-    private void displayListNota() {
+    protected void displayListNota() {
         if (notaList.length != 0) {
             for (Nota nota : notaList) {
-                if (nota.isDone() == true) {
-                    System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
-                } else {
-                    System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
-                }
+                System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
             }
             System.out.println();
+        } else {
+            System.out.println("Belum ada nota di dalam sistem!\n");
         }
     }
 }
