@@ -71,10 +71,7 @@ public class Nota {
     }
 
     public String getNotaStatus() {
-        if (!isDone) {
-            return "Belum selesai.";
-        }
-        return "Sudah selesai.";
+        return isDone ? "Sudah selesai." : "Belum selesai.";
     }
 
     public void setNotaStatus() {
@@ -106,7 +103,7 @@ public class Nota {
             }
 
             if (this.daysLate > 0) {
-                totalHarga -= Math.abs(this.sisaHariPengerjaan) * COMPENSATION_PER_DAY;
+                totalHarga -= this.daysLate * COMPENSATION_PER_DAY;
                 outputServices += String.format("Harga Akhir: %d Ada kompensasi keterlambatan %d * %d hari\n", 
                                   totalHarga, this.daysLate, COMPENSATION_PER_DAY);
             } else {

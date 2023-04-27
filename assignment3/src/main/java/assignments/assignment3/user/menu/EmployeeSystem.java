@@ -56,10 +56,10 @@ public class EmployeeSystem extends SystemCLI {
                 System.out.printf("Nota %d : %s\n", nota.getId(), nota.kerjakan());
                 nota.setNotaStatus();
             }
+            System.out.println();
         } else {
             System.out.println("Belum ada nota di dalam sistem!\n");
         }
-        System.out.println();
     }
 
     protected void displayListNota() {
