@@ -103,7 +103,12 @@ public class Nota {
             }
 
             if (this.daysLate > 0) {
-                totalHarga -= this.daysLate * COMPENSATION_PER_DAY;
+                long kompensasi = this.daysLate * COMPENSATION_PER_DAY;
+                if (totalHarga <= kompensasi) {
+                    totalHarga = 0;
+                } else {
+                    totalHarga -= kompensasi;
+                }
                 outputServices += String.format("Harga Akhir: %d Ada kompensasi keterlambatan %d * %d hari\n", 
                                   totalHarga, this.daysLate, COMPENSATION_PER_DAY);
             } else {

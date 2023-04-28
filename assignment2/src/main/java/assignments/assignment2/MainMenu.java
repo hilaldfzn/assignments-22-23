@@ -13,7 +13,6 @@ public class MainMenu {
     private static Calendar cal = Calendar.getInstance();
     private static ArrayList<Member> memberList = new ArrayList <>();
     private static ArrayList<Nota> notaList = new ArrayList <>();
-    private static int counterIdNota = 0;
 
      /* Method main
      * Program akan terus berjalan hingga user memilih menu selesai
@@ -174,7 +173,6 @@ public class MainMenu {
 
         // Mencetak nota dan menambahkan ke list nota
         System.out.println("Berhasil menambahkan nota!");
-        MainMenu.incrementNotaId();
         System.out.println(nota.generateNota(memberList.get(idxMember), paketLaundry, berat, fmt.format(cal.getTime()), bonusCounter));
         notaList.add(nota);
     }
@@ -289,15 +287,6 @@ public class MainMenu {
             }
         }
         return null;
-    }
-
-    // Method untuk getter dan menambah ID nota tiap generate nota
-    public static void incrementNotaId() {
-        counterIdNota += 1;
-    }
-
-    public static int getCounter() {
-        return counterIdNota;
     }
 
     // Method untuk mencetak menu yang tersedia di CuciCuci

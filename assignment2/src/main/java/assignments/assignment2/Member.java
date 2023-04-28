@@ -12,7 +12,6 @@ public class Member {
         this.nama = nama;
         this.noHp = noHp;
         this.id = NotaGenerator.generateId(nama, noHp);
-        this.bonusCounter = 0;
     }
 
     // Method untuk setter getter pada class Member
@@ -25,7 +24,7 @@ public class Member {
     }
 
     public String getId() {
-        return this.id;
+        return id;
     }
     
     public void setNama(String nama) {
@@ -36,15 +35,15 @@ public class Member {
         this.noHp = noHp;
     }
 
-    public int getBonusCounter() {
-        return bonusCounter += 1;
+    public int addBonusCounter(int bonus) {
+        return bonusCounter += bonus;
     }
 
-    public void checkBonusCounter(int bonusCounter) {
+    public boolean isDiscount() {
         if (bonusCounter == 3) {
             bonusCounter = 0;
-        } else {
-            getBonusCounter();
+            return true;
         }
+        return false;
     }
 }

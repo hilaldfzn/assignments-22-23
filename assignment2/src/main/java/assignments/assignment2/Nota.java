@@ -10,21 +10,23 @@ public class Nota {
     private int idNota;
     private int sisaHariPengerjaan;
     private boolean isReady;
+    static public int totalNota;
 
     public Nota(Member member, String paket, int berat, String tanggalMasuk) {
         this.member = member;
         this.paket = paket;
         this.berat = berat;
         this.tanggalMasuk = tanggalMasuk;
-        this.idNota = MainMenu.getCounter();
+        this.idNota = totalNota;
         this.sisaHariPengerjaan = 0;
         this.isReady = false;
+        totalNota++;
+        member.addBonusCounter(1);
     }
     
     public String generateNota(Member idUser, String paket, int berat, String tanggalMasuk, int bonusCounter) {
         int waktuCuci = 0, biayaPaket = 0, hargaCuci = 0;
         String formatHarga = "";
-        bonusCounter = getMember().getBonusCounter();
 
         if (paket.toLowerCase().equals("reguler")) {
             waktuCuci = 3;                             // Paket reguler, pengerjaan 3 hari dan harganya 7000/kg
@@ -37,8 +39,7 @@ public class Nota {
             biayaPaket = 12000;
         }
         
-        if (bonusCounter == 3) {
-            bonusCounter = 0;
+        if (member.isDiscount()) {
             hargaCuci = (berat * biayaPaket);
             int hargaDiskon = hargaCuci / 2; 
             formatHarga = String.format(" kg x %d = %d = %d (Discount member %s)", biayaPaket, hargaCuci, hargaDiskon, "50%!!!");
@@ -53,7 +54,7 @@ public class Nota {
         
         
         // Return nota dengan format id, paket, harga, tanggal terima dan tanggal selesai
-        return "[ID NOTA = " + idNota + "]" + "\n" +
+        return "[ID NOTA = " + this.idNota + "]" + "\n" +
                "ID    : " + idUser.getId()  + "\n" +
                "Paket : " + paket + "\n" +
                "Harga :" + "\n" + berat + formatHarga + "\n" +
@@ -80,15 +81,15 @@ public class Nota {
     }
 
     public int getIdNota() {
-        return this.idNota;
+        return idNota;
     }
 
     public int getSisaHariPengerjaan() {
-        return this.sisaHariPengerjaan;
+        return sisaHariPengerjaan;
     }
 
     public boolean getReady() {
-        return this.isReady;
+        return isReady;
     }
 
     public void setMember(Member member) {
