@@ -47,8 +47,8 @@ public class Nota {
     public String kerjakan() {
         boolean allServiceDone = false;
         for (LaundryService service : services) {   // Iterasi semua service pada array services
-            if (!service.isDone()) {                // Jika masih ada service yang belum selesai, maka akan
-                allServiceDone = false;             // tetap mereturn service yang sedang dikerjakan
+            if (!service.isDone()) {                // Jika masih ada service yang belum selesai, maka
+                allServiceDone = false;             // akan tetap mereturn service yang sedang dikerjakan
                 return service.doWork();
             }
             allServiceDone = true;                  // Flag allServiceDone bernilai true ketika semua service selesai dikerjakan
