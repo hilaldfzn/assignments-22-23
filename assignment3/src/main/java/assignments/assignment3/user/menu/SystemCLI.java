@@ -17,7 +17,7 @@ public abstract class SystemCLI {
      * @param inputId -> ID user yang akan diautentikasi.
      * @param inputPassword -> password user yang akan diautentikasi.
      */
-    public void login(Scanner in, String inputId, String inputPassword){
+    public void login(Scanner in, String inputId, String inputPassword) {
         Member authMember = authUser(inputId, inputPassword);
 
         if (authMember != null) {
@@ -35,7 +35,7 @@ public abstract class SystemCLI {
      * @param in -> Scanner object untuk membaca input.
      * @param member -> Member object yang menggunakan sistem.
      */
-    public void run(Scanner in, Member member){
+    public void run(Scanner in, Member member) {
         loginMember = member;
         boolean logout = false;
         while (!logout) {
@@ -74,7 +74,7 @@ public abstract class SystemCLI {
      * @param id -> ID yang akan diperiksa.
      * @return true jika ada member dengan ID yang diberikan, false jika tidak.
      */
-    public boolean isMemberExist(String id){
+    public boolean isMemberExist(String id) {
         for (Member member : memberList) {
             if (member.getId().equals(id)) {
                 return true;

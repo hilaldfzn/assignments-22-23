@@ -40,8 +40,8 @@ public class LoginManager {
      * @return Member object yang berhasil mendaftar, return null jika gagal mendaftar.
      */
     public Member register(String nama, String noHp, String password) {   
-        Member member = new Member(nama, NotaGenerator.generateId(nama, noHp), password);   
-        if (!memberSystem.isMemberExist(member.getId())) {
+        Member member = new Member(nama, NotaGenerator.generateId(nama, noHp), password);   // Instansiasi objek nota
+        if (!memberSystem.isMemberExist(member.getId())) {                     // Jika member belum ada di list member, maka akan ditambahkan                 
             memberSystem.addMember(member);
             return member;
         }

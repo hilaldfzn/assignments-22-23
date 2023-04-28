@@ -33,7 +33,7 @@ public class EmployeeSystem extends SystemCLI {
             case 1 -> processNyuciTime();
             case 2 -> displayListNota();
             case 3 -> logout = true;
-            default -> System.out.println("Pilihan tidak valid, silakan coba lagi.");
+            default -> System.out.println("Pilihan tidak valid, silakan coba lagi.\n");
         }
         return logout;
     }
@@ -58,7 +58,7 @@ public class EmployeeSystem extends SystemCLI {
             }
             System.out.println();
         } else {
-            System.out.println("Belum ada nota di dalam sistem!\n");
+            System.out.println("Belum ada nota di dalam sistem!\n");            
         }
     }
 

@@ -20,7 +20,7 @@ public class MemberSystem extends SystemCLI {
             case 1 -> processLaundryRequest();
             case 2 -> processDetailNota();
             case 3 -> logout = true;
-            default -> System.out.println("Pilihan tidak valid, silakan coba lagi.");
+            default -> System.out.println("Pilihan tidak valid, silakan coba lagi.\n");
         }
         return logout;
     }
@@ -52,29 +52,29 @@ public class MemberSystem extends SystemCLI {
     }
     
     protected void processLaundryRequest() {
-        System.out.println("Masukan paket laundry:");
+        System.out.println("Masukan paket laundry:");                 // Mencetak paket yang tersedia
         System.out.println("+-------------Paket-------------+");
         System.out.println("| Express | 1 Hari | 12000 / Kg |");
         System.out.println("| Fast    | 2 Hari | 10000 / Kg |");
         System.out.println("| Reguler | 3 Hari |  7000 / Kg |");
         System.out.println("+-------------------------------+");
-        String paketPilihan = in.nextLine();
+        String paketPilihan = in.nextLine();                            // Input pilihan paket
 
         System.out.println("Masukan berat cucian anda [Kg]:");
-        int berat = in.nextInt();
-        if (berat > 0 && berat < 2) {
+        int berat = in.nextInt();                                       // Input berat cucian
+        if (berat > 0 && berat < 2) {                                   // Jika berat cucian kurang dari 2 kg, maka akan diset sebagai 2 kg
             berat = 2;
             System.out.println("Cucian kurang dari 2 kg, maka cucian akan dianggap sebagai 2 kg");
         }
 
-        Nota nota = new Nota(loginMember, berat, paketPilihan, NotaManager.fmt.format(NotaManager.cal.getTime()));
-        nota.addService(new CuciService());
+        Nota nota = new Nota(loginMember, berat, paketPilihan, NotaManager.fmt.format(NotaManager.cal.getTime()));  // Instansiasi objek nota
+        nota.addService(new CuciService());                             // Menambahkan service cuci ke nota
 
         System.out.println("Apakah kamu ingin cucianmu disetrika oleh staff professional kami?");
         System.out.println("Hanya tambah 1000 / kg :0");
         System.out.print("[Ketik x untuk tidak mau]: ");
         String setrikaService = in.next();
-        if (!setrikaService.equalsIgnoreCase("x")) {
+        if (!setrikaService.equalsIgnoreCase("x")) {      // Jika input selain x, maka akan menambahkan service setrika ke nota
             nota.addService(new SetrikaService());
         }
 
@@ -82,18 +82,18 @@ public class MemberSystem extends SystemCLI {
         System.out.println("Cuma 2000 / 4kg, kemudian 500 / kg");
         System.out.print("[Ketik x untuk tidak mau]: ");
         String antarService = in.next();
-        if (!antarService.equalsIgnoreCase("x")); {
-            nota.addService(new AntarService());
+        if (!antarService.equalsIgnoreCase("x")); {       // Jika input selain x, maka akan menambahkan service antar ke nota
+            nota.addService(new AntarService());    
         }
 
         System.out.println("Nota berhasil dibuat!\n");
-        NotaManager.addNota(nota);
+        NotaManager.addNota(nota);                                      // Menambahkan nota ke class NotaManager dan Member itu sendiri
         loginMember.addNota(nota);
     }
 
     protected void processDetailNota() {
-        for (Nota nota : loginMember.getNotaList()) {
-            System.out.println(nota.toString());
+        for (Nota nota : loginMember.getNotaList()) {                   // Iterasi semua nota yang ada di list nota
+            System.out.println(nota.toString());                        // Mencetak semua nota berserta servicenya sesuai format
         }
     }
 }

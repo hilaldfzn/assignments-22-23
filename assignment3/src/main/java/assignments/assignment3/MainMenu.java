@@ -44,7 +44,7 @@ public class MainMenu {
                 case 2 -> register();
                 case 3 -> toNextDay();
                 case 4 -> exit = true;
-                default -> System.out.println("Pilihan tidak valid, silakan coba lagi.");
+                default -> System.out.println("Pilihan tidak valid, silakan coba lagi\n");
             }
         }
         in.close();
