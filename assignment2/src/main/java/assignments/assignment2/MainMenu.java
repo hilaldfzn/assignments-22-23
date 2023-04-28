@@ -130,7 +130,7 @@ public class MainMenu {
 
         System.out.println("Masukan berat cucian Anda [Kg]:");  
         do {
-            beratCucian = input.nextLine();                     // Meminta input berat cucian
+            beratCucian = input.nextLine();                     // Input berat cucian
 
             // Menghandle jika input berat cucian berupa string kosong
             while (!isValidInput(beratCucian)) {
