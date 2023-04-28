@@ -199,7 +199,7 @@ public class NotaGenerator {
      * [NAMADEPAN]-[nomorHP]-[2digitChecksum]
      */
     public static String generateId(String nama, String nomorHP) {
-        String firstName = nama.toUpperCase().split(" ")[0];    // Mengambil nama depan pelanggan (uppercase)
+        String firstName = nama.split(" ")[0].toUpperCase();    // Mengambil nama depan pelanggan (uppercase)
         String idPelanggan = String.format("%s-%s", firstName, nomorHP);
         int checkSum = getSum(idPelanggan);
 
