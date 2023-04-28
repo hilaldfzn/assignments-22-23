@@ -166,7 +166,7 @@ public class MainMenu {
             }
         } while (!isNumeric);
 
-        // Mengkonversi tipe data cucian menjadi int dan membuat objek nota
+        // Konversi tipe data cucian menjadi int dan membuat objek nota
         int berat = Integer.valueOf(beratCucian);
         Nota nota = new Nota(memberList.get(idxMember), paketLaundry, berat, fmt.format(cal.getTime()));
         nota.setSisaHariPengerjaan(lamaPengerjaan);
