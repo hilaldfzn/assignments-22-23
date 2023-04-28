@@ -98,7 +98,7 @@ public class Nota {
 
         if (this.services.length != 0) {
             for (LaundryService service : services) {
-                outputServices += String.format("-%s @ Rp.%d\n", service.getServiceName(), service.getHarga(berat));
+                outputServices += String.format("-%s @ Rp.%d%n", service.getServiceName(), service.getHarga(berat));
                 totalHarga += service.getHarga(berat);
             }
 
@@ -109,10 +109,10 @@ public class Nota {
                 } else {
                     totalHarga -= kompensasi;
                 }
-                outputServices += String.format("Harga Akhir: %d Ada kompensasi keterlambatan %d * %d hari\n", 
+                outputServices += String.format("Harga Akhir: %d Ada kompensasi keterlambatan %d * %d hari%n", 
                                   totalHarga, this.daysLate, COMPENSATION_PER_DAY);
             } else {
-                outputServices += String.format("Harga Akhir: %d\n", totalHarga);
+                outputServices += String.format("Harga Akhir: %d%n", totalHarga);
             }
         }
         return outputServices;

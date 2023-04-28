@@ -50,10 +50,10 @@ public class EmployeeSystem extends SystemCLI {
 
     protected void processNyuciTime() {
         if (notaList.length != 0) {
-            System.out.printf("Stand back! %s beginning to nyuci!\n", loginMember.getNama());
+            System.out.printf("Stand back! %s beginning to nyuci!%n", loginMember.getNama());
     
             for (Nota nota : notaList) {
-                System.out.printf("Nota %d : %s\n", nota.getId(), nota.kerjakan());
+                System.out.printf("Nota %d : %s%n", nota.getId(), nota.kerjakan());
                 nota.setNotaStatus();
             }
             System.out.println();
@@ -65,7 +65,7 @@ public class EmployeeSystem extends SystemCLI {
     protected void displayListNota() {
         if (notaList.length != 0) {
             for (Nota nota : notaList) {
-                System.out.printf("Nota %d : %s\n", nota.getId(), nota.getNotaStatus());
+                System.out.printf("Nota %d : %s%n", nota.getId(), nota.getNotaStatus());
             }
             System.out.println();
         } else {

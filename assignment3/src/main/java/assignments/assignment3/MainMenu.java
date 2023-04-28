@@ -71,10 +71,10 @@ public class MainMenu {
 
         Member registeredMember = loginManager.register(nama, noHp, password);
         if (registeredMember == null) {
-            System.out.printf("User dengan nama %s dan nomor hp %s sudah ada!\n\n", nama, noHp);
+            System.out.printf("User dengan nama %s dan nomor hp %s sudah ada!%n%n", nama, noHp);
             return;
         }
-        System.out.printf("Berhasil membuat user dengan ID %s!\n\n", registeredMember.getId());
+        System.out.printf("Berhasil membuat user dengan ID %s!%n%n", registeredMember.getId());
     }
 
     /**
@@ -99,7 +99,7 @@ public class MainMenu {
      */
     private void displayMenu() {
         System.out.println("Selamat datang di CuciCuci System!");
-        System.out.printf("Sekarang tanggal %s\n", fmt.format(cal.getTime()));
+        System.out.printf("Sekarang tanggal %s%n", fmt.format(cal.getTime()));
         System.out.println("1. Login");
         System.out.println("2. Register Member");
         System.out.println("3. Tidur (Skip hari)");
