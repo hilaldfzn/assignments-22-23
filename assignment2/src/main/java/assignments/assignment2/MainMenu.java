@@ -82,19 +82,12 @@ public class MainMenu {
 
     private static void handleGenerateNota() {
         // Inisialisasi local variable
-        int idxMember = 0, bonusCounter = 0;
         boolean isNumeric = false;
         String beratCucian;
 
         System.out.println("Masukan ID member:");               
         String memberId = input.nextLine();                     // Meminta input ID member
-        
-        // Memasukkan indeks untuk ID member
-        for (int i = 0; i < memberList.size(); i++) {
-            if (memberIdExists(memberId)) {
-                idxMember = i;
-            }
-        }
+        Member member = findMember(memberId);
 
         // Jika ID belum ada di dalam list member, maka akan menampilkan pesan error
         if (!memberIdExists(memberId)) {
@@ -168,12 +161,12 @@ public class MainMenu {
 
         // Konversi tipe data cucian menjadi int dan membuat objek nota
         int berat = Integer.valueOf(beratCucian);
-        Nota nota = new Nota(memberList.get(idxMember), paketLaundry, berat, fmt.format(cal.getTime()));
+        Nota nota = new Nota(member, paketLaundry, berat, fmt.format(cal.getTime()));
         nota.setSisaHariPengerjaan(lamaPengerjaan);
 
         // Mencetak nota dan menambahkan ke list nota
         System.out.println("Berhasil menambahkan nota!");
-        System.out.println(nota.generateNota(memberList.get(idxMember), paketLaundry, berat, fmt.format(cal.getTime()), bonusCounter));
+        System.out.println(nota.generateNota(member, paketLaundry, berat, fmt.format(cal.getTime())));
         notaList.add(nota);
     }
 
@@ -265,6 +258,17 @@ public class MainMenu {
             }
         }
         return false;
+    }
+
+    private static Member findMember(String id) {
+        for (int i = 0; i < memberList.size(); i++) {
+            if (memberList.get(i) == null)
+                return null;
+            if (memberList.get(i).getId().equals(id)) {
+                return memberList.get(i);
+            }
+        }
+        return null;
     }
 
     // Method untuk mencari index ID nota

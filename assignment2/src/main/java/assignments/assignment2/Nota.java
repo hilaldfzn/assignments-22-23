@@ -24,7 +24,7 @@ public class Nota {
         member.addBonusCounter(1);
     }
     
-    public String generateNota(Member idUser, String paket, int berat, String tanggalMasuk, int bonusCounter) {
+    public String generateNota(Member idUser, String paket, int berat, String tanggalMasuk) {
         int waktuCuci = 0, biayaPaket = 0, hargaCuci = 0;
         String formatHarga = "";
 
@@ -40,10 +40,9 @@ public class Nota {
         }
         
         if (member.isDiscount()) {
-            hargaCuci = (berat * biayaPaket);
-            int hargaDiskon = hargaCuci / 2; 
-            formatHarga = String.format(" kg x %d = %d = %d (Discount member %s)", biayaPaket, hargaCuci, hargaDiskon, "50%!!!");
-
+                hargaCuci = (berat * biayaPaket);
+                int hargaDiskon = hargaCuci / 2; 
+                formatHarga = String.format(" kg x %d = %d = %d (Discount member %s)", biayaPaket, hargaCuci, hargaDiskon, "50%!!!"); 
         } else {
             hargaCuci = berat * biayaPaket;            // Menghitung harga laundry sesuai paket dan berat cucian
             formatHarga = String.format(" kg x %d = %d", biayaPaket, hargaCuci);
@@ -55,7 +54,7 @@ public class Nota {
         
         // Return nota dengan format id, paket, harga, tanggal terima dan tanggal selesai
         return "[ID NOTA = " + this.idNota + "]" + "\n" +
-               "ID    : " + idUser.getId()  + "\n" +
+               "ID    : " + member.getId()  + "\n" +
                "Paket : " + paket + "\n" +
                "Harga :" + "\n" + berat + formatHarga + "\n" +
                "Tanggal Terima  : " + tanggalMasuk + "\n" +
