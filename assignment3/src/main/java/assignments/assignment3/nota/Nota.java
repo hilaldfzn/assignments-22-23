@@ -89,7 +89,7 @@ public class Nota {
                "ID    : " + member.getId() + "\n" +
                "Paket : " + paket + "\n" +
                "Harga :\n" + berat + " kg x " + getHargaPaket(paket) + " = " + calculateHarga() + "\n" +
-               "tanggal terima  : " + this.tanggalMasuk + "\n" +
+               "tanggal terima  : " + tanggalMasuk + "\n" +
                "tanggal selesai : " + NotaGenerator.getDate(tanggalMasuk, getHariPaket(paket)) + "\n" +
                "--- SERVICE LIST ---\n" + infoService();
     }
