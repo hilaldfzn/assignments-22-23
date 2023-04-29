@@ -62,7 +62,7 @@ public class MemberSystem extends SystemCLI {
 
         System.out.println("Masukan berat cucian anda [Kg]:");
         int berat = in.nextInt();                                       // Input berat cucian
-        if (berat > 0 && berat < 2) {                                   // Jika berat cucian kurang dari 2 kg, maka akan diset sebagai 2 kg
+        if (berat > 0 && berat < 2) {                                   // Jika berat cucian kurang dari 2 kg, maka akan diset menjadi 2 kg
             berat = 2;
             System.out.println("Cucian kurang dari 2 kg, maka cucian akan dianggap sebagai 2 kg");
         }

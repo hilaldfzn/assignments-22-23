@@ -64,12 +64,12 @@ public class Nota {
             sisaHariPengerjaan--;                    // Mengurangi 1 hari waktu pengerjaan
             if (sisaHariPengerjaan < 0) {            // Jika sisa hari pengerjaan kurang dari 0, maka hari telat akan bertambah 1 hari
                 daysLate += 1;
-        }
+            }
         }
     }
 
-    public long calculateHarga() {                   // Return base harga cuci sesuai berat dan paket yang dipilih
-        return baseHarga;
+    public long calculateHarga() {                   
+        return baseHarga;                            // Base harga yang dimaksud adalah harga cuci tanpa service apapun
     }
 
     public String getNotaStatus() {
@@ -78,13 +78,13 @@ public class Nota {
 
     public void setNotaStatus() {
         for(LaundryService service : services) {               // Iterasi semua service yang ada
-            if (service.isDone()) isDone = true;          // Jika semua service selesai, maka flag isDone akan bernilai true
+            if (service.isDone()) isDone = true;               // Jika semua service selesai, maka flag isDone akan bernilai true
             else isDone = false;
         }
     }
 
     @Override
-    public String toString() {
+    public String toString() {                                 // Mencetak nota beserta service listnya
         return "[ID Nota = " + id + "]" + "\n" +
                "ID    : " + member.getId() + "\n" +
                "Paket : " + paket + "\n" +
@@ -98,7 +98,7 @@ public class Nota {
         String outputServices = "";
         long totalHarga = calculateHarga();             
 
-        /* Mencetak semua service yang dipilih member di SERVICE LIST
+        /* Mencetak semua service yang dipilih member ke SERVICE LIST
          * Total harga akan ditambahkan harga tiap servicenya
          */
         for (LaundryService service : services) {
@@ -108,7 +108,7 @@ public class Nota {
 
         if (daysLate > 0) {                                        // Jika terlambat, maka member akan mendapat kompensasi
             long kompensasi = daysLate * COMPENSATION_PER_DAY;     // Kompensasi yang didapat 2000 per hari keterlambatan
-            if (totalHarga <= kompensasi) {                        // Jika kompensasi melebihi total harga, maka harga bayar diset 0
+            if (totalHarga <= kompensasi) {                        // Jika kompensasi melebihi total harga, maka harga bayar diset menjadi 0
                 totalHarga = 0;                                    
             } else {
                 totalHarga -= kompensasi;                          // Jika tidak, total harga bayar akan dikurangi kompensasi
