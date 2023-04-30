@@ -51,25 +51,31 @@ public class EmployeeSystem extends SystemCLI {
     protected void processNyuciTime() {
         if (notaList.length != 0) {
             System.out.printf("Stand back! %s beginning to nyuci!%n", loginMember.getNama());
-    
-            for (Nota nota : notaList) {
-                System.out.printf("Nota %d : %s%n", nota.getId(), nota.kerjakan());
+            
+            /* Iterasi semua nota yang ada pada sistem dan mencetak
+             * proses apa yang sedang dijalankan pada semua nota
+             */
+            for (Nota nota : notaList) {                                                      
+                System.out.printf("Nota %d : %s%n", nota.getId(), nota.kerjakan());    
                 nota.setNotaStatus();
             }
             System.out.println();
         } else {
-            System.out.println("Belum ada nota di dalam sistem!\n");            
+            System.out.println("Belum ada nota di dalam sistem!\n");    // Jika belum ada nota yang dibuat
         }
     }
 
     protected void displayListNota() {
         if (notaList.length != 0) {
+            /* Iterasi semua nota yang ada pada sistem dan mencetak
+             * status semua nota (Sudah selesai/Belum selesai)
+             */
             for (Nota nota : notaList) {
                 System.out.printf("Nota %d : %s%n", nota.getId(), nota.getNotaStatus());
             }
             System.out.println();
         } else {
-            System.out.println("Belum ada nota di dalam sistem!\n");
+            System.out.println("Belum ada nota di dalam sistem!\n");    // Jika belum ada nota yang dibuat
         }
     }
 }

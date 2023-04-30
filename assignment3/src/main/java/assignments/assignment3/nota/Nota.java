@@ -1,4 +1,5 @@
 package assignments.assignment3.nota;
+
 import assignments.assignment1.NotaGenerator;
 import assignments.assignment3.nota.service.LaundryService;
 import assignments.assignment3.user.Member;
@@ -63,7 +64,7 @@ public class Nota {
         if (!isDone) {
             sisaHariPengerjaan--;                    // Mengurangi 1 hari waktu pengerjaan
             if (sisaHariPengerjaan < 0) {            // Jika sisa hari pengerjaan kurang dari 0, maka hari telat akan bertambah 1 hari
-                daysLate += 1;
+                daysLate++;
             }
         }
     }

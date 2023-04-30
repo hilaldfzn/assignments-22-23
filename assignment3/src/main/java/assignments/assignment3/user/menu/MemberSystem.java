@@ -1,4 +1,5 @@
 package assignments.assignment3.user.menu;
+
 import assignments.assignment3.user.Member;
 import assignments.assignment3.nota.Nota;
 import assignments.assignment3.nota.NotaManager;
@@ -92,8 +93,12 @@ public class MemberSystem extends SystemCLI {
     }
 
     protected void processDetailNota() {
-        for (Nota nota : loginMember.getNotaList()) {                   // Iterasi semua nota yang ada di list nota
-            System.out.println(nota.toString());                        // Mencetak semua nota berserta servicenya sesuai format
+        if (loginMember.getNotaList().length != 0) {
+            for (Nota nota : loginMember.getNotaList()) {               // Iterasi semua nota milik member
+                System.out.println(nota.toString());                    // Mencetak semua nota berserta servicenya sesuai format
+            }                  
+        } else {
+            System.out.println("Member belum memiliki nota\n");       // Jika member belum laundry, maka tidak ada nota milik member
         }
     }
 }
