@@ -36,7 +36,7 @@ public class Member {
             tempNotaList[i] = notaList[i];
         }
 
-        this.notaList = tempNotaList;
+        notaList = tempNotaList;
         tempNotaList[this.notaList.length - 1] = nota;
     }
 
