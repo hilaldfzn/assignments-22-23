@@ -1,6 +1,7 @@
 package assignments.assignment3.user;
 
 import assignments.assignment3.nota.Nota;
+
 public class Member {
     protected String id;
     protected String password;
@@ -37,7 +38,7 @@ public class Member {
         }
 
         notaList = tempNotaList;
-        tempNotaList[this.notaList.length - 1] = nota;
+        tempNotaList[notaList.length - 1] = nota;
     }
 
     /**

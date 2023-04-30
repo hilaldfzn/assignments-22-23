@@ -1,8 +1,8 @@
 package assignments.assignment3.nota;
 
 import assignments.assignment1.NotaGenerator;
-import assignments.assignment3.nota.service.LaundryService;
 import assignments.assignment3.user.Member;
+import assignments.assignment3.nota.service.LaundryService;
 
 public class Nota {
     // Properti class nota dengan visibility modifier yang sesuai
@@ -54,6 +54,7 @@ public class Nota {
             }
             allServiceDone = true;                  // Flag allServiceDone bernilai true ketika semua service selesai dikerjakan
         }
+
         if (allServiceDone) {                       // Ketika semua service selesai, maka akan mengecek status nota
             return getNotaStatus();                 
         }
@@ -63,6 +64,7 @@ public class Nota {
     public void toNextDay() {
         if (!isDone) {
             sisaHariPengerjaan--;                    // Mengurangi 1 hari waktu pengerjaan
+
             if (sisaHariPengerjaan < 0) {            // Jika sisa hari pengerjaan kurang dari 0, maka hari telat akan bertambah 1 hari
                 daysLate++;
             }
@@ -78,14 +80,14 @@ public class Nota {
     }
 
     public void setNotaStatus() {
-        for(LaundryService service : services) {               // Iterasi semua service yang ada
+        for (LaundryService service : services) {              // Iterasi semua service yang ada
             if (service.isDone()) isDone = true;               // Jika semua service selesai, maka flag isDone akan bernilai true
             else isDone = false;
         }
     }
 
     @Override
-    public String toString() {                                 // Mencetak nota beserta service listnya
+    public String toString() {                                 // Mencetak format nota beserta service listnya
         return "[ID Nota = " + id + "]" + "\n" +
                "ID    : " + member.getId() + "\n" +
                "Paket : " + paket + "\n" +
