@@ -86,10 +86,10 @@ public class Nota {
         for (LaundryService service : services) {              // Iterasi semua service yang ada
             if (!service.isDone())  {
                 isDone = false;                                
-                return;
+            } else {
+                isDone = true;                                 // Jika semua service selesai, maka flag isDone akan bernilai true
             }
         }
-        isDone = true;                                         // Jika semua service selesai, maka flag isDone akan bernilai true
     }
 
     @Override
@@ -110,7 +110,6 @@ public class Nota {
         /* Mencetak semua service yang dipilih member ke SERVICE LIST
          * Total harga akan ditambahkan harga tiap servicenya
          */
-      
         for (LaundryService service : services) {
             outputServices += String.format("-%s @ Rp.%d%n", service.getServiceName(), service.getHarga(berat));
             totalHarga += service.getHarga(berat);
@@ -152,7 +151,6 @@ public class Nota {
     }
 
     // Dibawah ini adalah getter
-
     public String getPaket() {
         return paket;
     }
