@@ -16,7 +16,7 @@ public class Employee extends Member {
      */
     private static String generateId(String nama) {
         String idEmployee = String.format("%s-%d", nama.split(" ")[0].toUpperCase(), employeeCount);
-        employeeCount++;                            // Jumlah employee bertambah tiap kali objek employee dibuat
+        employeeCount++;                             // Jumlah employee bertambah tiap kali objek employee dibuat
         
         return idEmployee;
     }

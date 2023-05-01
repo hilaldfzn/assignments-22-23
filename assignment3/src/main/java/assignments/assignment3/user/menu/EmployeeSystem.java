@@ -61,7 +61,7 @@ public class EmployeeSystem extends SystemCLI {
             }
             System.out.println();
         } else {
-            System.out.println("Belum ada nota di dalam sistem!\n");    // Jika belum ada nota yang dibuat
+            System.out.println("Belum ada nota di dalam sistem!\n");     // Jika belum ada nota yang dibuat
         }
     }
 
@@ -75,7 +75,7 @@ public class EmployeeSystem extends SystemCLI {
             }
             System.out.println();
         } else {
-            System.out.println("Belum ada nota di dalam sistem!\n");    // Jika belum ada nota yang dibuat
+            System.out.println("Belum ada nota di dalam sistem!\n");     // Jika belum ada nota yang dibuat
         }
     }
 }

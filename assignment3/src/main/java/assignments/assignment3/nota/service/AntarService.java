@@ -5,23 +5,23 @@ public class AntarService implements LaundryService {
 
     @Override
     public String doWork() {                   
-        isDone = true;                         // Jika dipanggil minimal sekali akan mengubah isDone() menjadi true
+        isDone = true;                        // Jika dipanggil minimal sekali akan mengubah isDone() menjadi true
         return "Sedang mengantar...";          
     }
 
     @Override
     public boolean isDone() {
-        return isDone;                         // Return nilai method ini bergantung pada doWork()
+        return isDone;                        // Return nilai method ini bergantung pada doWork()
     }
 
     @Override
     public long getHarga(int berat) {
-        long harga = berat * 500;              // Harga antar 500/kg, dengan harga minimal 2000
+        long harga = berat * 500;             // Harga antar 500/kg, dengan harga minimal 2000
         return harga < 2000 ? 2000 : harga;
     }
 
     @Override
     public String getServiceName() {           
-        return "Antar";                        // Nama dari service ini adalah Antar
+        return "Antar";                       // Nama dari service ini adalah Antar
     }
 }

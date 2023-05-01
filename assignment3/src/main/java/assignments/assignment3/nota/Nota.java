@@ -46,33 +46,36 @@ public class Nota {
     }
 
     public String kerjakan() {
+        String serviceStatus = "";
         boolean allServiceDone = false;
+
         for (LaundryService service : services) {   // Iterasi semua service pada array services
             if (!service.isDone()) {                // Jika masih ada service yang belum selesai, maka
                 allServiceDone = false;             // akan tetap mereturn service yang sedang dikerjakan
-                return service.doWork();
+                serviceStatus = service.doWork();
+                break;
             }
             allServiceDone = true;                  // Flag allServiceDone bernilai true ketika semua service selesai dikerjakan
         }
 
         if (allServiceDone) {                       // Ketika semua service selesai, maka akan mengecek status nota
-            return getNotaStatus();                 
+            serviceStatus = getNotaStatus();                 
         }
-        return "";
+        return serviceStatus;
     }
     
     public void toNextDay() {
         if (!isDone) {
-            sisaHariPengerjaan--;                    // Mengurangi 1 hari waktu pengerjaan
+            sisaHariPengerjaan--;                   // Mengurangi 1 hari waktu pengerjaan
 
-            if (sisaHariPengerjaan < 0) {            // Jika sisa hari pengerjaan kurang dari 0, maka hari telat akan bertambah 1 hari
+            if (sisaHariPengerjaan < 0) {           // Jika sisa hari pengerjaan kurang dari 0, maka hari telat akan bertambah 1 hari
                 daysLate++;
             }
         }
     }
 
     public long calculateHarga() {                   
-        return baseHarga;                            // Base harga yang dimaksud adalah harga cuci tanpa service apapun
+        return baseHarga;                           // Base harga yang dimaksud adalah harga cuci tanpa service apapun
     }
 
     public String getNotaStatus() {
@@ -81,9 +84,12 @@ public class Nota {
 
     public void setNotaStatus() {
         for (LaundryService service : services) {              // Iterasi semua service yang ada
-            if (service.isDone()) isDone = true;               // Jika semua service selesai, maka flag isDone akan bernilai true
-            else isDone = false;
+            if (!service.isDone())  {
+                isDone = false;                                
+                return;
+            }
         }
+        isDone = true;                                         // Jika semua service selesai, maka flag isDone akan bernilai true
     }
 
     @Override
@@ -104,6 +110,7 @@ public class Nota {
         /* Mencetak semua service yang dipilih member ke SERVICE LIST
          * Total harga akan ditambahkan harga tiap servicenya
          */
+      
         for (LaundryService service : services) {
             outputServices += String.format("-%s @ Rp.%d%n", service.getServiceName(), service.getHarga(berat));
             totalHarga += service.getHarga(berat);
