@@ -75,6 +75,8 @@ public class MemberSystem extends SystemCLI {
         System.out.println("Hanya tambah 1000 / kg :0");
         System.out.print("[Ketik x untuk tidak mau]: ");
         String setrikaService = in.next();
+        in.nextLine();
+
         if (!setrikaService.equalsIgnoreCase("x")) {     // Jika input selain x, maka akan menambahkan service setrika ke nota
             nota.addService(new SetrikaService());
         }
@@ -83,6 +85,8 @@ public class MemberSystem extends SystemCLI {
         System.out.println("Cuma 2000 / 4kg, kemudian 500 / kg");
         System.out.print("[Ketik x untuk tidak mau]: ");
         String antarService = in.next();
+        in.nextLine();
+        
         if (!antarService.equalsIgnoreCase("x")) {       // Jika input selain x, maka akan menambahkan service antar ke nota
             nota.addService(new AntarService());    
         }
