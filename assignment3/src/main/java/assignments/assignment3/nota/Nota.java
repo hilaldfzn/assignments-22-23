@@ -74,8 +74,13 @@ public class Nota {
         }
     }
 
-    public long calculateHarga() {                   
-        return baseHarga;                           // Base harga yang dimaksud adalah harga cuci tanpa service apapun
+    public long calculateHarga() { 
+        long calculateHarga = baseHarga;                       // Menghitung keseluruhan harga beserta servicenya
+
+        for (LaundryService service : services) {
+            calculateHarga += service.getHarga(berat); 
+        }      
+        return calculateHarga;                           
     }
 
     public String getNotaStatus() {
@@ -84,11 +89,7 @@ public class Nota {
 
     public void setNotaStatus() {
         for (LaundryService service : services) {              // Iterasi semua service yang ada
-            if (!service.isDone())  {
-                isDone = false;                                
-            } else {
-                isDone = true;                                 // Jika semua service selesai, maka flag isDone akan bernilai true
-            }
+            isDone = service.isDone() ? true : false;          // Jika semua service selesai, maka flag isDone akan bernilai true
         }
     }
 
@@ -97,7 +98,7 @@ public class Nota {
         return "[ID Nota = " + id + "]" + "\n" +
                "ID    : " + member.getId() + "\n" +
                "Paket : " + paket + "\n" +
-               "Harga :\n" + berat + " kg x " + getHargaPaket(paket) + " = " + calculateHarga() + "\n" +
+               "Harga :\n" + berat + " kg x " + getHargaPaket(paket) + " = " + baseHarga + "\n" +
                "tanggal terima  : " + tanggalMasuk + "\n" +
                "tanggal selesai : " + NotaGenerator.getDate(tanggalMasuk, getHariPaket(paket)) + "\n" +
                "--- SERVICE LIST ---\n" + infoService();
@@ -112,7 +113,6 @@ public class Nota {
          */
         for (LaundryService service : services) {
             outputServices += String.format("-%s @ Rp.%d%n", service.getServiceName(), service.getHarga(berat));
-            totalHarga += service.getHarga(berat);
         }
 
         if (daysLate > 0) {                                        // Jika terlambat, maka member akan mendapat kompensasi
