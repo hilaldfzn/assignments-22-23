@@ -11,11 +11,11 @@ public class Nota {
     private LaundryService[] services;
     private long baseHarga;
     private int sisaHariPengerjaan;
+    private int daysLate;
     private int berat;
     private int id;
     private String tanggalMasuk;
     private boolean isDone;
-    private int daysLate;
     static public int totalNota;
     private static final long COMPENSATION_PER_DAY = 2000;
 
@@ -25,11 +25,11 @@ public class Nota {
         this.berat = berat;
         this.paket = paket;
         this.tanggalMasuk = tanggal;
-        this.baseHarga = berat * getHargaPaket(paket);
-        this.sisaHariPengerjaan = getHariPaket(paket);
-        this.services = new LaundryService[0];
-        this.isDone = false;
-        this.id = totalNota;
+        baseHarga = berat * getHargaPaket(paket);
+        sisaHariPengerjaan = getHariPaket(paket);
+        services = new LaundryService[0];
+        isDone = false;
+        id = totalNota;
         totalNota++;
     }
 
@@ -47,18 +47,17 @@ public class Nota {
 
     public String kerjakan() {
         String serviceStatus = "";
-        boolean allServiceDone = false;
 
         for (LaundryService service : services) {   // Iterasi semua service pada array services
             if (!service.isDone()) {                // Jika masih ada service yang belum selesai, maka
-                allServiceDone = false;             // akan tetap mereturn service yang sedang dikerjakan
+                isDone = false;                     // akan tetap mereturn service yang sedang dikerjakan
                 serviceStatus = service.doWork();
                 break;
             }
-            allServiceDone = true;                  // Flag allServiceDone bernilai true ketika semua service selesai dikerjakan
+            isDone = true;                          // Flag allServiceDone bernilai true ketika semua service selesai dikerjakan
         }
 
-        if (allServiceDone) {                       // Ketika semua service selesai, maka akan mengecek status nota
+        if (isDone) {                               // Ketika semua service selesai, maka akan mengecek status nota
             serviceStatus = getNotaStatus();                 
         }
         return serviceStatus;
@@ -95,13 +94,16 @@ public class Nota {
 
     @Override
     public String toString() {                                 // Mencetak format nota beserta service listnya
-        return "[ID Nota = " + id + "]" + "\n" +
-               "ID    : " + member.getId() + "\n" +
-               "Paket : " + paket + "\n" +
-               "Harga :\n" + berat + " kg x " + getHargaPaket(paket) + " = " + baseHarga + "\n" +
-               "tanggal terima  : " + tanggalMasuk + "\n" +
-               "tanggal selesai : " + NotaGenerator.getDate(tanggalMasuk, getHariPaket(paket)) + "\n" +
-               "--- SERVICE LIST ---\n" + infoService();
+        return String.format("""
+                [ID Nota = %d]
+                ID    : %s
+                Paket : %s
+                Harga :\n%d kg x %d = %d
+                tanggal terima  : %s
+                tanggal selesai : %s
+                --- SERVICE LIST ---\n%s
+                """, id, member.getId(), paket, berat, getHargaPaket(paket), baseHarga, tanggalMasuk,
+                NotaGenerator.getDate(tanggalMasuk, getHariPaket(paket)), infoService());
     }
 
     public String infoService() {
@@ -122,10 +124,10 @@ public class Nota {
             } else {
                 totalHarga -= kompensasi;                          // Jika tidak, total harga bayar akan dikurangi kompensasi
             }
-            outputServices += String.format("Harga Akhir: %d Ada kompensasi keterlambatan %d * %d hari%n", 
+            outputServices += String.format("Harga Akhir: %d Ada kompensasi keterlambatan %d * %d hari", 
                               totalHarga, daysLate, COMPENSATION_PER_DAY);
         } else {
-            outputServices += String.format("Harga Akhir: %d%n", totalHarga);
+            outputServices += String.format("Harga Akhir: %d", totalHarga);
         }
         return outputServices;
     }
