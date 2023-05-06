@@ -50,11 +50,11 @@ public class Nota {
 
         for (LaundryService service : services) {   // Iterasi semua service pada array services
             if (!service.isDone()) {                // Jika masih ada service yang belum selesai, maka
-                isDone = false;                     // akan tetap mereturn service yang sedang dikerjakan
-                serviceStatus = service.doWork();
+                isDone = false;                     // flag isDone akan tetap false
+                serviceStatus = service.doWork();   // lalu mereturn service yang sedang dikerjakan
                 break;
             }
-            isDone = true;                          // Flag allServiceDone bernilai true ketika semua service selesai dikerjakan
+            isDone = true;                          // Flag isDone bernilai true ketika semua service selesai dikerjakan
         }
 
         if (isDone) {                               // Ketika semua service selesai, maka akan mengecek status nota
