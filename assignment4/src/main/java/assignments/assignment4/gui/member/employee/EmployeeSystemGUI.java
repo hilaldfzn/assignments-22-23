@@ -7,6 +7,7 @@ import assignments.assignment3.user.menu.SystemCLI;
 import assignments.assignment4.gui.member.AbstractMemberGUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class EmployeeSystemGUI extends AbstractMemberGUI {
@@ -15,7 +16,6 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
     public EmployeeSystemGUI(SystemCLI systemCLI) {
         super(systemCLI);
     }
-
 
     @Override
     public String getPageName(){
@@ -31,7 +31,12 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
     @Override
     protected JButton[] createButtons() {
         // TODO
+        JButton cuciButton = new JButton("It's nyuci time");
+        JButton displayNotaButton = new JButton("Display List Nota");
+
         return new JButton[]{
+            cuciButton,
+            displayNotaButton
         };
     }
 
@@ -55,6 +60,23 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * */
     private void displayNota() {
         // TODO
+        if (NotaManager.notaList.length != 0) {    
+            StringBuilder sb = new StringBuilder();
+            for (Nota nota : NotaManager.notaList) {
+                sb.append(String.format("Nota %d : %s\n", nota.getId(), nota.getNotaStatus()));
+            }
+            JTextArea textArea = new JTextArea(sb.toString());
+            textArea.setFont(new Font("monospaced", Font.PLAIN, 12));
+            textArea.setLineWrap(true);
+            textArea.setWrapStyleWord(true);
+            textArea.setEditable(false);
+
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(400, 300));
+            JOptionPane.showMessageDialog(this, scrollPane, "List Nota", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Belum ada nota dalam sistem!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
@@ -63,5 +85,20 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * */
     private void cuci() {
         // TODO
+        if (NotaManager.notaList.length != 0) {
+            for (Nota nota : NotaManager.notaList) {
+                JOptionPane.showMessageDialog(null, "Stand back! " + loggedInMember.getNama() + " beginning to nyuci!",
+                                          "Nota Status", JOptionPane.INFORMATION_MESSAGE);
+
+                String kerjakan = String.format("<html><pre> Nota %d : %s </pre></html>", nota.getId(), nota.kerjakan());
+                nota.setNotaStatus();
+
+                JLabel label = new JLabel(kerjakan);
+                label.setFont(new Font("monospaced", Font.PLAIN, 12));
+                JOptionPane.showMessageDialog(this, label, "Service", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Belum ada nota dalam sistem!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

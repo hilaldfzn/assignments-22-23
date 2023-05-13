@@ -35,7 +35,12 @@ public class MemberSystemGUI extends AbstractMemberGUI {
     @Override
     protected JButton[] createButtons() {
         // TODO
+        JButton createNotaButton = new JButton("Saya ingin laundry");
+        JButton showDetailNotaButton = new JButton("Lihat detail nota saya");
+
         return new JButton[]{
+            createNotaButton,
+            showDetailNotaButton
         };
     }
 
@@ -48,8 +53,8 @@ public class MemberSystemGUI extends AbstractMemberGUI {
     @Override
     protected ActionListener[] createActionListeners() {
         return new ActionListener[]{
-                e -> createNota(),
-                e -> showDetailNota(),
+            e -> createNota(),
+            e -> showDetailNota(),
         };
     }
 
@@ -59,6 +64,24 @@ public class MemberSystemGUI extends AbstractMemberGUI {
      * */
     private void showDetailNota() {
         // TODO
+        if (loggedInMember.getNotaList().length != 0) {
+            StringBuilder sb = new StringBuilder();
+            for (Nota nota : loggedInMember.getNotaList()) {
+                sb.append(String.format("%s%n", nota.toString()));
+            }
+
+            JTextArea textArea = new JTextArea(sb.toString());
+            textArea.setFont(new Font("monospaced", Font.PLAIN, 12));
+            textArea.setLineWrap(true);
+            textArea.setWrapStyleWord(true);
+            textArea.setEditable(false);
+
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(400, 300));
+            JOptionPane.showMessageDialog(this, scrollPane, "Detail Nota", JOptionPane.INFORMATION_MESSAGE);;
+        } else {
+            JOptionPane.showMessageDialog(this, "Member belum memiliki nota!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
@@ -67,6 +90,6 @@ public class MemberSystemGUI extends AbstractMemberGUI {
      * */
     private void createNota() {
         // TODO
+        MainFrame.getInstance().navigateTo(CreateNotaGUI.KEY);
     }
-
 }

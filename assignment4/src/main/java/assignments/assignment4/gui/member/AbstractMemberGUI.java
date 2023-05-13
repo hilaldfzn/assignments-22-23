@@ -18,13 +18,14 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable{
     public AbstractMemberGUI(SystemCLI systemCLI) {
         super(new BorderLayout());
         this.systemCLI = systemCLI;
+
         // Set up welcome label
-        welcomeLabel = new JLabel("", SwingConstants.CENTER);
+        welcomeLabel = new JLabel("Welcome! ", SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 24));
         add(welcomeLabel, BorderLayout.NORTH);
 
         // Set up footer
-        loggedInAsLabel = new JLabel("", SwingConstants.CENTER);
+        loggedInAsLabel = new JLabel("Logged as: ", SwingConstants.CENTER);
         add(loggedInAsLabel, BorderLayout.SOUTH);
 
         // Initialize buttons
@@ -77,7 +78,7 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable{
     /**
      * Method untuk login pada panel.
      * <p>
-     * Method ini akan melakukan pengecekan apakah ID dan passowrd yang telah diberikan dapat login
+     * Method ini akan melakukan pengecekan apakah ID dan password yang telah diberikan dapat login
      * pada panel ini. <p>
      * Jika bisa, member akan login pada panel ini, method akan:<p>
      *  - mengupdate Welcome & LoggedInAs label.<p>
@@ -89,6 +90,10 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable{
      * */
     public boolean login(String id, String password) {
         // TODO
+        loggedInMember = systemCLI.authUser(id, password);
+        if (loggedInMember != null) {
+            return true;
+        }
         return false;
     }
 
