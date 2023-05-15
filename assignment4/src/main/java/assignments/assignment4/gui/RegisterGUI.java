@@ -1,6 +1,5 @@
 package assignments.assignment4.gui;
 
-import assignments.assignment1.NotaGenerator;
 import assignments.assignment3.LoginManager;
 import assignments.assignment3.user.Member;
 import assignments.assignment4.MainFrame;
@@ -114,25 +113,25 @@ public class RegisterGUI extends JPanel {
         if (name.isEmpty() || phone.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Semua field di atas wajib diisi!",
                                           "Empty Field", JOptionPane.ERROR_MESSAGE);
-        }
-
-        String id = NotaGenerator.generateId(name, phone);
-        Member member = loginManager.register(name, phone, password);
-
-        if (!isNumeric(phone)) {
-            JOptionPane.showMessageDialog(null, "Nomor handphone harus berisi angka!", 
-                                          "Invalid Phone Number", JOptionPane.ERROR_MESSAGE);
-            phoneTextField.setText("");
         } else {
-            if (member != null) {
-                JOptionPane.showMessageDialog(null, "Berhasil membuat user dengan ID " + id + "!", 
-                                            "Registration Successful", JOptionPane.INFORMATION_MESSAGE);
+            //String id = NotaGenerator.generateId(name, phone);
+            Member member = loginManager.register(name, phone, password);
+
+            if (!isNumeric(phone)) {
+                JOptionPane.showMessageDialog(null, "Nomor handphone harus berisi angka!", 
+                                            "Invalid Phone Number", JOptionPane.ERROR_MESSAGE);
+                phoneTextField.setText("");
             } else {
-                JOptionPane.showMessageDialog(null, "User dengan nama " + name + " dan nomor hp " + phone + " sudah ada!", 
-                                            "Registration Failed", JOptionPane.ERROR_MESSAGE);
+                if (member != null) {
+                    JOptionPane.showMessageDialog(null, "Berhasil membuat user dengan ID " + member.getId() + "!", 
+                                                "Registration Successful", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "User dengan nama " + name + " dan nomor hp " + phone + " sudah ada!", 
+                                                "Registration Failed", JOptionPane.ERROR_MESSAGE);
+                }
+                clearFields();
+                MainFrame.getInstance().navigateTo(HomeGUI.KEY);
             }
-            clearFields();
-            MainFrame.getInstance().navigateTo(HomeGUI.KEY);
         }
     }
 
