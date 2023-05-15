@@ -7,8 +7,6 @@ import assignments.assignment4.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import java.util.regex.Pattern;
 
@@ -55,20 +53,10 @@ public class RegisterGUI extends JPanel {
         passwordField = new JPasswordField(20);
 
         registerButton = new JButton("Register");
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleRegister();
-            }
-        });
+        registerButton.addActionListener(e -> handleRegister());
 
         backButton = new JButton("Kembali");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleBack();
-            }
-        });
+        backButton.addActionListener(e -> handleBack());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -126,7 +114,6 @@ public class RegisterGUI extends JPanel {
         if (name.isEmpty() || phone.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Semua field di atas wajib diisi!",
                                           "Empty Field", JOptionPane.ERROR_MESSAGE);
-            return;
         }
 
         String id = NotaGenerator.generateId(name, phone);
@@ -136,13 +123,12 @@ public class RegisterGUI extends JPanel {
             JOptionPane.showMessageDialog(null, "Nomor handphone harus berisi angka!", 
                                           "Invalid Phone Number", JOptionPane.ERROR_MESSAGE);
             phoneTextField.setText("");
-            return;
         } else {
             if (member != null) {
                 JOptionPane.showMessageDialog(null, "Berhasil membuat user dengan ID " + id + "!", 
                                             "Registration Successful", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Member dengan nama " + name + " dan nomor hp " + phone + " sudah ada!", 
+                JOptionPane.showMessageDialog(null, "User dengan nama " + name + " dan nomor hp " + phone + " sudah ada!", 
                                             "Registration Failed", JOptionPane.ERROR_MESSAGE);
             }
             clearFields();

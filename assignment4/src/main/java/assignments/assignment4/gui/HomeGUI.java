@@ -4,8 +4,6 @@ import assignments.assignment4.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static assignments.assignment3.nota.NotaManager.cal;
 import static assignments.assignment3.nota.NotaManager.fmt;
@@ -49,28 +47,13 @@ public class HomeGUI extends JPanel {
         mainPanel.add(titleLabel, constraints);
 
         loginButton = new JButton("Login");
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleToLogin();
-            }
-        });
+        loginButton.addActionListener(e -> handleToLogin());
 
         registerButton = new JButton("Register");
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleToRegister();
-            }
-        });
+        registerButton.addActionListener(e -> handleToRegister());
 
         toNextDayButton = new JButton("Next Day");
-        toNextDayButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleNextDay();
-            }
-        });
+        toNextDayButton.addActionListener(e -> handleNextDay());
 
         constraints.gridy = 1;
         constraints.fill = GridBagConstraints.NONE;

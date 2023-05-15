@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -65,16 +66,16 @@ public class CreateNotaGUI extends JPanel {
         });
         add(showPaketButton);
 
-        beratLabel = new JLabel("Berat Cucian (Kg):");
+        beratLabel = new JLabel("Berat Cucian (kg):");
         add(beratLabel);
         beratTextField = new JTextField();
         add(beratTextField);
 
-        setrikaCheckBox = new JCheckBox("Tambah Setrika Service (1000/kg)");
+        setrikaCheckBox = new JCheckBox("Setrika Service (1000/kg)");
         add(setrikaCheckBox);
         add(new JLabel());
 
-        antarCheckBox = new JCheckBox("Tambah Antar Service (2000/4kg pertama, kemudian 500/kg)");
+        antarCheckBox = new JCheckBox("Antar Service (2000/4kg pertama, lalu 500/kg)");
         add(antarCheckBox);
         add(new JLabel());
 
@@ -112,17 +113,21 @@ public class CreateNotaGUI extends JPanel {
      * */
     private void createNota() {
         // TODO
-        String paket = (String) paketComboBox.getSelectedItem();
+        String paket = paketComboBox.getSelectedItem().toString();
         int berat = 0;
         try {
             berat = Integer.parseInt(beratTextField.getText());
             if (berat > 0 && berat < 2) {
                 berat = 2;
-                JOptionPane.showMessageDialog(this, "Cucian kurang dari 2 kg, maka cucian akan dianggap sebagai 2 kg", 
-                                              "Info", JOptionPane.ERROR_MESSAGE);
-            } 
+                JOptionPane.showMessageDialog(null, "Cucian kurang dari 2 kg, maka cucian akan dianggap sebagai 2 kg", 
+                                              "Info", JOptionPane.INFORMATION_MESSAGE);
+            } else if (berat <= 0) {
+                JOptionPane.showMessageDialog(null, "Berat cucian harus berisi angka", "Error", JOptionPane.ERROR_MESSAGE);
+                beratTextField.setText("");
+                return;
+            }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Berat cucian harus berisi angka", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Berat cucian harus berisi angka", "Error", JOptionPane.ERROR_MESSAGE);
             beratTextField.setText("");
             return;
         }
@@ -139,9 +144,9 @@ public class CreateNotaGUI extends JPanel {
             nota.addService(new AntarService());
         }
 
-        JOptionPane.showMessageDialog(this, "Nota berhasil dibuat!", "Success Create Nota", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Nota berhasil dibuat!", "Success Create Nota", JOptionPane.INFORMATION_MESSAGE);
         NotaManager.addNota(nota);
-        //loggedInMember.addNota(nota);
+        loggedInMember.addNota(nota);
         clearFields();
     }
 

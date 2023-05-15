@@ -18,11 +18,11 @@ public class MemberSystemGUI extends AbstractMemberGUI {
     }
 
     @Override
-    public String getPageName(){
+    public String getPageName() {
         return KEY;
     }
 
-    public Member getLoggedInMember(){
+    public Member getLoggedInMember() {
         return loggedInMember;
     }
 
@@ -77,10 +77,10 @@ public class MemberSystemGUI extends AbstractMemberGUI {
             textArea.setEditable(false);
 
             JScrollPane scrollPane = new JScrollPane(textArea);
-            scrollPane.setPreferredSize(new Dimension(400, 300));
-            JOptionPane.showMessageDialog(this, scrollPane, "Detail Nota", JOptionPane.INFORMATION_MESSAGE);;
+            scrollPane.setPreferredSize(new Dimension(500, 300));
+            JOptionPane.showMessageDialog(null, scrollPane, "Detail Nota", JOptionPane.INFORMATION_MESSAGE);;
         } else {
-            JOptionPane.showMessageDialog(this, "Member belum memiliki nota!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Member belum memiliki nota!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

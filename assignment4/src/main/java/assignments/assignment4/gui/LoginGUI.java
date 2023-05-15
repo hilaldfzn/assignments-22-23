@@ -3,14 +3,13 @@ package assignments.assignment4.gui;
 import assignments.assignment3.LoginManager;
 import assignments.assignment3.user.Member;
 import assignments.assignment3.user.menu.MemberSystem;
+import assignments.assignment3.user.menu.SystemCLI;
 import assignments.assignment4.MainFrame;
 import assignments.assignment4.gui.member.employee.EmployeeSystemGUI;
 import assignments.assignment4.gui.member.member.MemberSystemGUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LoginGUI extends JPanel {
     public static final String KEY = "LOGIN";
@@ -50,20 +49,10 @@ public class LoginGUI extends JPanel {
         passwordField = new JPasswordField(20);
 
         loginButton = new JButton("Login");
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleLogin();
-            }
-        });
+        loginButton.addActionListener(e -> handleLogin());
 
         backButton = new JButton("Kembali");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleBack();
-            }
-        });
+        backButton.addActionListener(e -> handleBack());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -98,8 +87,7 @@ public class LoginGUI extends JPanel {
      * */
     private void handleBack() {
         MainFrame.getInstance().navigateTo(HomeGUI.KEY);
-        idTextField.setText("");
-        passwordField.setText("");
+        clearFields();
     }
 
     /**
@@ -110,18 +98,34 @@ public class LoginGUI extends JPanel {
         // TODO
         String id = idTextField.getText();
         String password = new String(passwordField.getPassword());
-        Member user = loginManager.getSystem(id).authUser(id, password);
-    
-        if (user != null) {
-            idTextField.setText("");
-            passwordField.setText("");
-            if (loginManager.getSystem(id) instanceof MemberSystem) {
-                MainFrame.getInstance().navigateTo(MemberSystemGUI.KEY);
-            } else {
-                MainFrame.getInstance().navigateTo(EmployeeSystemGUI.KEY);
-            }
+
+        if (id.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Field ID dan Password wajib diisi!", "Empty Field", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Invalid ID or Password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            SystemCLI userSystem = loginManager.getSystem(id);
+
+            if (userSystem == null) {
+                JOptionPane.showMessageDialog(null, "Invalid ID or Password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Member userLogin = userSystem.authUser(id, password);
+
+                if (userLogin == null) {
+                    JOptionPane.showMessageDialog(null, "Invalid ID or Password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (userSystem instanceof MemberSystem) {
+                        MainFrame.getInstance().navigateTo(MemberSystemGUI.KEY);
+                    } else {
+                        MainFrame.getInstance().navigateTo(EmployeeSystemGUI.KEY);
+                    }
+                    MainFrame.getInstance().login(id, password);
+                }
+            }
         }
+        clearFields();
+    }
+
+    private void clearFields() {
+        idTextField.setText("");
+        passwordField.setText("");
     }
 }

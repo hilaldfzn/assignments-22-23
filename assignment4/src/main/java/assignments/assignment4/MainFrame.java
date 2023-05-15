@@ -1,6 +1,6 @@
 package assignments.assignment4;
 import assignments.assignment3.LoginManager;
-//import assignments.assignment3.user.Employee;
+import assignments.assignment3.user.Employee;
 import assignments.assignment3.user.menu.EmployeeSystem;
 import assignments.assignment3.user.menu.MemberSystem;
 import assignments.assignment4.gui.HomeGUI;
@@ -31,12 +31,17 @@ public class MainFrame extends JFrame {
 
     private MainFrame() {
         super("CuciCuciSystem");
-//        TODO: uncomment code dibawah ini setelah kamu implmentasikan addEmployee pada EmployeeSystem.
-//        // for context dari 2 employee baru ini : https://ristek.link/karyawan-baru-cucicuci
-//        employeeSystem.addEmployee(new Employee[] {
-//                new Employee("delta Epsilon Huha Huha", "ImplicitDiff"),
-//                new Employee("Regret", "FansBeratKanaArima")
-//        });
+        // TODO: uncomment code dibawah ini setelah kamu implmentasikan addEmployee pada EmployeeSystem.
+        // for context dari 2 employee baru ini : https://ristek.link/karyawan-baru-cucicuci
+        employeeSystem.addEmployee(new Employee[] {
+                new Employee("delta Epsilon Huha Huha", "ImplicitDiff"),
+                new Employee("Regret", "FansBeratKanaArima"),
+                new Employee("Muhammad Hilal Darul Fauzan", "crisbarenak"),
+                new Employee("Shanti Yoga Rahayu", "majikanmoceng"),
+                new Employee("Caesar Syahru Ramadhan", "JavaConstructor"),
+                new Employee("Joseph Bintang Ardhirespati", "PasukanAbuy"),
+                new Employee("Rakha Fadil Atmojo", "tukanglontong")
+        });
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 432);
         setVisible(true);
