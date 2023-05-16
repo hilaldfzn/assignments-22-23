@@ -25,7 +25,6 @@ public class EmployeeSystem extends SystemCLI {
     
         System.arraycopy(memberList, 0, result, 0, memberList.length);
         System.arraycopy(employees, 0, result, memberList.length, employees.length);
-    
         memberList = result;
     }
 
