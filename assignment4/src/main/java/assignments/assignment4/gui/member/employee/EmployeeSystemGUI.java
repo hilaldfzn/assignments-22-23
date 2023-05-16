@@ -2,7 +2,6 @@ package assignments.assignment4.gui.member.employee;
 
 import assignments.assignment3.nota.Nota;
 import assignments.assignment3.nota.NotaManager;
-
 import assignments.assignment3.user.menu.SystemCLI;
 import assignments.assignment4.gui.member.AbstractMemberGUI;
 
@@ -17,7 +16,7 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
     }
 
     @Override
-    public String getPageName(){
+    public String getPageName() {
         return KEY;
     }
 
@@ -29,11 +28,10 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * */
     @Override
     protected JButton[] createButtons() {
-        // TODO
         JButton cuciButton = new JButton("It's nyuci time");
         JButton displayNotaButton = new JButton("Display List Nota");
 
-        return new JButton[]{
+        return new JButton[] {
             cuciButton,
             displayNotaButton
         };
@@ -47,7 +45,7 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * */
     @Override
     protected ActionListener[] createActionListeners() {
-        return new ActionListener[]{
+        return new ActionListener[] {
                 e -> cuci(),
                 e -> displayNota(),
         };
@@ -58,13 +56,12 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * Akan dipanggil jika pengguna menekan button pertama pada createButtons
      * */
     private void displayNota() {
-        // TODO
         if (NotaManager.notaList.length != 0) {    
             StringBuilder sb = new StringBuilder();
             for (Nota nota : NotaManager.notaList) {
                 sb.append(String.format("Nota %d : %s\n", nota.getId(), nota.getNotaStatus()));
             }
-            JOptionPane.showMessageDialog(this, sb.toString(), "List Nota", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, sb.toString(), "List Nota", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Belum ada nota dalam sistem!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -75,7 +72,6 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * Akan dipanggil jika pengguna menekan button kedua pada createButtons
      * */
     private void cuci() {
-        // TODO
         if (NotaManager.notaList.length != 0) {
             StringBuilder sb = new StringBuilder();
             JOptionPane.showMessageDialog(null, "Stand back! " + loggedInMember.getNama() + " beginning to nyuci!",

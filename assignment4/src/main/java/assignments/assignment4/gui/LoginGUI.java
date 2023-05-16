@@ -2,11 +2,8 @@ package assignments.assignment4.gui;
 
 import assignments.assignment3.LoginManager;
 import assignments.assignment3.user.Member;
-import assignments.assignment3.user.menu.MemberSystem;
 import assignments.assignment3.user.menu.SystemCLI;
 import assignments.assignment4.MainFrame;
-import assignments.assignment4.gui.member.employee.EmployeeSystemGUI;
-import assignments.assignment4.gui.member.member.MemberSystemGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +38,6 @@ public class LoginGUI extends JPanel {
      * Be creative and have fun!
      * */
     private void initGUI() {
-        // TODO
         idLabel = new JLabel("ID");
         idTextField = new JTextField(20);
 
@@ -95,7 +91,6 @@ public class LoginGUI extends JPanel {
      * Akan dipanggil jika pengguna menekan "loginButton"
      * */
     private void handleLogin() {
-        // TODO
         String id = idTextField.getText();
         String password = new String(passwordField.getPassword());
 
@@ -112,11 +107,6 @@ public class LoginGUI extends JPanel {
                 if (userLogin == null) {
                     JOptionPane.showMessageDialog(null, "Invalid ID or Password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    if (userSystem instanceof MemberSystem) {
-                        MainFrame.getInstance().navigateTo(MemberSystemGUI.KEY);
-                    } else {
-                        MainFrame.getInstance().navigateTo(EmployeeSystemGUI.KEY);
-                    }
                     MainFrame.getInstance().login(id, password);
                 }
             }

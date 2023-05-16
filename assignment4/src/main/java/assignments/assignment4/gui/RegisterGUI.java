@@ -41,7 +41,6 @@ public class RegisterGUI extends JPanel {
      * Be creative and have fun!
      * */
     private void initGUI() {
-        // TODO
         nameLabel = new JLabel("Nama");
         nameTextField = new JTextField(20);
 
@@ -105,7 +104,6 @@ public class RegisterGUI extends JPanel {
     * Akan dipanggil jika pengguna menekan "registerButton"
     * */
     private void handleRegister() {
-        // TODO
         String name = nameTextField.getText().trim();
         String phone = phoneTextField.getText();
         String password = new String(passwordField.getPassword());
@@ -114,7 +112,6 @@ public class RegisterGUI extends JPanel {
             JOptionPane.showMessageDialog(null, "Semua field di atas wajib diisi!",
                                           "Empty Field", JOptionPane.ERROR_MESSAGE);
         } else {
-            //String id = NotaGenerator.generateId(name, phone);
             Member member = loginManager.register(name, phone, password);
 
             if (!isNumeric(phone)) {

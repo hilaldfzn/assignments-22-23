@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public abstract class AbstractMemberGUI extends JPanel implements Loginable{
+public abstract class AbstractMemberGUI extends JPanel implements Loginable {
     private JLabel welcomeLabel;
     private JLabel loggedInAsLabel;
     protected Member loggedInMember;
@@ -84,7 +84,6 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable{
      * @return true jika ID dan password sesuai dengan instance member, false jika tidak.
      * */
     public boolean login(String id, String password) {
-        // TODO
         loggedInMember = systemCLI.authUser(id, password);
         
         if (loggedInMember != null) {

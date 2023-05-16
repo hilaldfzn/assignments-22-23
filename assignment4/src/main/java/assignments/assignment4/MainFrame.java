@@ -1,4 +1,5 @@
 package assignments.assignment4;
+
 import assignments.assignment3.LoginManager;
 import assignments.assignment3.user.Employee;
 import assignments.assignment3.user.menu.EmployeeSystem;
@@ -31,8 +32,7 @@ public class MainFrame extends JFrame {
 
     private MainFrame() {
         super("CuciCuciSystem");
-        // TODO: uncomment code dibawah ini setelah kamu implmentasikan addEmployee pada EmployeeSystem.
-        // for context dari 2 employee baru ini : https://ristek.link/karyawan-baru-cucicuci
+
         employeeSystem.addEmployee(new Employee[] {
                 new Employee("delta Epsilon Huha Huha", "ImplicitDiff"),
                 new Employee("Regret", "FansBeratKanaArima"),
@@ -40,7 +40,8 @@ public class MainFrame extends JFrame {
                 new Employee("Shanti Yoga Rahayu", "majikanmoceng"),
                 new Employee("Caesar Syahru Ramadhan", "JavaConstructor"),
                 new Employee("Joseph Bintang Ardhirespati", "PasukanAbuy"),
-                new Employee("Rakha Fadil Atmojo", "tukanglontong")
+                new Employee("Rakha Fadil Atmojo", "tukanglontong"),
+                new Employee("Patrick Samuel Evans Simanjuntak", "camatperak")
         });
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 432);
@@ -87,7 +88,6 @@ public class MainFrame extends JFrame {
      * @param page -> key dari halaman yang diinginkan.
      * */
     public void navigateTo(String page) {
-        // TODO
         cards.show(mainPanel, page);
     }
 
@@ -103,7 +103,6 @@ public class MainFrame extends JFrame {
      * */
     public boolean login(String id, String password) {
         for (Loginable panel : loginablePanel) {
-            // TODO
             if (panel.login(id, password)) {
                 navigateTo(panel.getPageName());
                 return true;

@@ -10,8 +10,6 @@ import assignments.assignment4.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,7 +44,6 @@ public class CreateNotaGUI extends JPanel {
      * Be creative and have fun!
      * */
     private void initGUI() {
-        // TODO
         setLayout(new GridLayout(6, 2, 10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -58,13 +55,8 @@ public class CreateNotaGUI extends JPanel {
         add(new JLabel());
 
         showPaketButton = new JButton("Show Paket");
-        showPaketButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showPaket();
-            }
-        });
         add(showPaketButton);
+        showPaketButton.addActionListener(e -> showPaket());
 
         beratLabel = new JLabel("Berat Cucian (kg):");
         add(beratLabel);
@@ -112,7 +104,6 @@ public class CreateNotaGUI extends JPanel {
      * Akan dipanggil jika pengguna menekan "createNotaButton"
      * */
     private void createNota() {
-        // TODO
         String paket = paketComboBox.getSelectedItem().toString();
         int berat = 0;
         try {
@@ -155,7 +146,6 @@ public class CreateNotaGUI extends JPanel {
      * Akan dipanggil jika pengguna menekan "backButton"
      * */
     private void handleBack() {
-        // TODO
         clearFields();
         MainFrame.getInstance().navigateTo(MemberSystemGUI.KEY);
     }

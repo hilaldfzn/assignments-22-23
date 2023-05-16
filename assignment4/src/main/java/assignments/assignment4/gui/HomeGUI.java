@@ -1,13 +1,12 @@
 package assignments.assignment4.gui;
 
+import static assignments.assignment3.nota.NotaManager.cal;
+import static assignments.assignment3.nota.NotaManager.fmt;
+import static assignments.assignment3.nota.NotaManager.toNextDay;
 import assignments.assignment4.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-
-import static assignments.assignment3.nota.NotaManager.cal;
-import static assignments.assignment3.nota.NotaManager.fmt;
-import static assignments.assignment3.nota.NotaManager.toNextDay;
 
 public class HomeGUI extends JPanel {
     public static final String KEY = "HOME";
@@ -96,7 +95,6 @@ public class HomeGUI extends JPanel {
     private void handleNextDay() {
         toNextDay();
         dateLabel.setText("Hari ini: " + fmt.format(cal.getTime()));
-        JOptionPane.showMessageDialog(null, "Kamu tidur hari ini... zzz...",
-                                      "Day Changed", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Kamu tidur hari ini... zzz...", "Day Changed", JOptionPane.INFORMATION_MESSAGE);
     }
 }
