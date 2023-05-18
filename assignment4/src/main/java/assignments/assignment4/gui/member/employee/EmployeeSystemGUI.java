@@ -25,7 +25,7 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * Button yang disediakan method ini BELUM memiliki ActionListener.
      *
      * @return Array of JButton, berisi button yang sudah stylize namun belum ada ActionListener.
-     * */
+     **/
     @Override
     protected JButton[] createButtons() {
         JButton cuciButton = new JButton("It's nyuci time");
@@ -42,7 +42,7 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
      * sesuai dengan requirements MemberSystem.
      *
      * @return Array of ActionListener.
-     * */
+     **/
     @Override
     protected ActionListener[] createActionListeners() {
         return new ActionListener[] {
@@ -54,7 +54,7 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
     /**
      * Menampilkan semua Nota yang ada pada sistem.
      * Akan dipanggil jika pengguna menekan button pertama pada createButtons
-     * */
+     **/
     private void displayNota() {
         if (NotaManager.notaList.length != 0) {    
             StringBuilder sb = new StringBuilder();
@@ -63,19 +63,20 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
             }
             JOptionPane.showMessageDialog(null, sb.toString(), "List Nota", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Belum ada nota dalam sistem!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Belum ada nota dalam sistem", "List Nota", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
      * Menampilkan dan melakukan action mencuci.
      * Akan dipanggil jika pengguna menekan button kedua pada createButtons
-     * */
+     **/
     private void cuci() {
+        JOptionPane.showMessageDialog(null, "Stand back! " + loggedInMember.getNama() + " beginning to nyuci!",
+                                          "Nyuci Time", JOptionPane.INFORMATION_MESSAGE);
+                                          
         if (NotaManager.notaList.length != 0) {
             StringBuilder sb = new StringBuilder();
-            JOptionPane.showMessageDialog(null, "Stand back! " + loggedInMember.getNama() + " beginning to nyuci!",
-                                          "Nyuci Time", JOptionPane.INFORMATION_MESSAGE);
 
             for (Nota nota : NotaManager.notaList) {
                 sb.append(String.format("Nota %d : %s\n", nota.getId(), nota.kerjakan()));
@@ -83,7 +84,7 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
             }
             JOptionPane.showMessageDialog(null, sb.toString(), "Nyuci Results", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Belum ada nota dalam sistem!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nothing to cuci here", "Nyuci Results", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

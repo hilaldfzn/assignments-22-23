@@ -1,6 +1,7 @@
 package assignments.assignment4.gui.member;
 
 import assignments.assignment3.user.Member;
+import assignments.assignment3.user.menu.MemberSystem;
 import assignments.assignment3.user.menu.SystemCLI;
 import assignments.assignment4.MainFrame;
 
@@ -38,11 +39,12 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable {
      * <p> Feel free to make any changes. Be creative and have fun!
      *
      * @return JPanel yang di dalamnya berisi Buttons.
-     * */
+     **/
     protected JPanel initializeButtons() {
         JButton[] buttons = createButtons();
         ActionListener[] listeners = createActionListeners();
 
+        // Throw exception ketika size array buttons dan listeners tidak sama
         if (buttons.length != listeners.length) {
             throw new IllegalStateException("Number of buttons and listeners must be equal.");
         }
@@ -82,13 +84,18 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable {
      * @param id -> ID anggota yang akan diautentikasi.
      * @param password -> password anggota untuk mengautentikasi.
      * @return true jika ID dan password sesuai dengan instance member, false jika tidak.
-     * */
+     **/
     public boolean login(String id, String password) {
         loggedInMember = systemCLI.authUser(id, password);
         
         if (loggedInMember != null) {
             welcomeLabel.setText("Welcome! " + loggedInMember.getNama());
-            loggedInAsLabel.setText("Logged as: " + loggedInMember.getId());
+
+            if (systemCLI instanceof MemberSystem) {
+                loggedInAsLabel.setText("Logged in as " + loggedInMember.getId() + " (Member)");
+            } else {
+                loggedInAsLabel.setText("Logged in as " + loggedInMember.getId() + " (Employee)");
+            }
             return true;
         }
         return false;
@@ -97,7 +104,7 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable {
     /**
      * Method untuk logout pada panel ini.
      * Akan mengubah loggedInMemberMenjadi null.
-     * */
+     **/
     public void logout() {
         loggedInMember = null;
     }
@@ -108,7 +115,7 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable {
      * Harus diimplementasikan sesuai class yang menginherit class ini.
      *
      * @return Array of JButton, berisi button yang sudah stylize namun belum ada ActionListener.
-     * */
+     **/
     protected abstract JButton[] createButtons();
 
     /**
@@ -116,6 +123,6 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable {
      * Harus diimplementasikan sesuai class yang menginherit class ini.
      *
      * @return Array of ActionListener.
-     * */
+     **/
     protected abstract ActionListener[] createActionListeners();
 }

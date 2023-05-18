@@ -21,79 +21,94 @@ public class RegisterGUI extends JPanel {
     private JButton registerButton;
     private LoginManager loginManager;
     private JButton backButton;
+    private JCheckBox showPasswordCheckBox;
 
     public RegisterGUI(LoginManager loginManager) {
-        super(new BorderLayout()); // Setup layout, Feel free to make any changes
+        // Setup layout
+        super(new BorderLayout());                      
         this.loginManager = loginManager;
 
-        // Set up main panel, Feel free to make any changes
+        // Set up main panel
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         initGUI();
 
-        add(mainPanel, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);            
     }
 
     /**
      * Method untuk menginisialisasi GUI.
-     * Selama funsionalitas sesuai dengan soal, tidak apa apa tidak 100% sama.
-     * Be creative and have fun!
-     * */
+     * Pada page ini terdapat tiga field yang harus diisi dan dua button
+     * Field: Nama, Nomor Handphone, dan Password
+     * Button: Kembali dan Register
+     **/
     private void initGUI() {
-        nameLabel = new JLabel("Nama");
-        nameTextField = new JTextField(20);
-
-        phoneLabel = new JLabel("Nomor HP");
-        phoneTextField = new JTextField(20);
-
-        passwordLabel = new JLabel("Password");
-        passwordField = new JPasswordField(20);
-
-        registerButton = new JButton("Register");
-        registerButton.addActionListener(e -> handleRegister());
-
-        backButton = new JButton("Kembali");
-        backButton.addActionListener(e -> handleBack());
-
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = new Insets(5, 0, 5, 0);
-        mainPanel.add(nameLabel, constraints);
-    
+        constraints.insets = new Insets(5, 5, 5, 5);
+        
+        // Label dan text field untuk Nama
+        nameLabel = new JLabel("Nama");  
+        constraints.gridx = 0;
+        constraints.gridy = 0;                                         
+        mainPanel.add(nameLabel, constraints);                              
+
+        nameTextField = new JTextField(20);
         constraints.gridx = 1;
         mainPanel.add(nameTextField, constraints);
-    
+
+        // Label dan text field untuk Nomor Handphone
+        phoneLabel = new JLabel("Nomor Handphone");
         constraints.gridx = 0;
         constraints.gridy = 1;
         mainPanel.add(phoneLabel, constraints);
-    
+
+        phoneTextField = new JTextField(20);
         constraints.gridx = 1;
         mainPanel.add(phoneTextField, constraints);
-    
+
+        // Label dan password field untuk Password
+        passwordLabel = new JLabel("Password");
         constraints.gridx = 0;
         constraints.gridy = 2;
         mainPanel.add(passwordLabel, constraints);
-    
+
+        passwordField = new JPasswordField(20);
         constraints.gridx = 1;
         mainPanel.add(passwordField, constraints);
-    
-        constraints.gridx = 0;
+
+        // Checkbox untuk menampilkan atau menyembunyikan password
+        showPasswordCheckBox = new JCheckBox("Show Password");
+        showPasswordCheckBox.setFont(new Font("Arial", Font.PLAIN, 10));
+        showPasswordCheckBox.addActionListener(e -> {
+            JCheckBox checkBox = (JCheckBox) e.getSource();
+            passwordField.setEchoChar(checkBox.isSelected() ? '\u0000' : '•');
+        });
+        constraints.gridx = 1;
         constraints.gridy = 3;
+        constraints.anchor = GridBagConstraints.WEST;
+        mainPanel.add(showPasswordCheckBox, constraints);
+
+        // Button Register dan Kembali beserta action listenernya
+        registerButton = new JButton("Register");
+        registerButton.addActionListener(e -> handleRegister());
+        constraints.gridx = 0;
+        constraints.gridy = 4;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         mainPanel.add(registerButton, constraints);
-    
-        constraints.gridy = 4;
+
+        backButton = new JButton("Kembali");
+        backButton.addActionListener(e -> handleBack());
+        constraints.gridy = 5;
         mainPanel.add(backButton, constraints);
     }
 
     /**
      * Method untuk kembali ke halaman home.
      * Akan dipanggil jika pengguna menekan "backButton"
-     * */
+     **/
     private void handleBack() {
         MainFrame.getInstance().navigateTo(HomeGUI.KEY);
         clearFields();
@@ -102,23 +117,25 @@ public class RegisterGUI extends JPanel {
     /**
     * Method untuk mendaftarkan member pada sistem.
     * Akan dipanggil jika pengguna menekan "registerButton"
-    * */
+    **/
     private void handleRegister() {
         String name = nameTextField.getText().trim();
         String phone = phoneTextField.getText();
         String password = new String(passwordField.getPassword());
 
+        // Menampilkan error message ketika ada field yang masih kosong
         if (name.isEmpty() || phone.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Semua field di atas wajib diisi!",
                                           "Empty Field", JOptionPane.ERROR_MESSAGE);
         } else {
-            Member member = loginManager.register(name, phone, password);
-
+            // Menampilkan error message ketika terdapat karakter selain angka pada nomor handphone
             if (!isNumeric(phone)) {
                 JOptionPane.showMessageDialog(null, "Nomor handphone harus berisi angka!", 
                                             "Invalid Phone Number", JOptionPane.ERROR_MESSAGE);
-                phoneTextField.setText("");
+                phoneTextField.setText("");                                   // Mengosongkan field nomor HP
             } else {
+                Member member = loginManager.register(name, phone, password);   // Membuat objek member yang melakukan register
+
                 if (member != null) {
                     JOptionPane.showMessageDialog(null, "Berhasil membuat user dengan ID " + member.getId() + "!", 
                                                 "Registration Successful", JOptionPane.INFORMATION_MESSAGE);
@@ -126,18 +143,29 @@ public class RegisterGUI extends JPanel {
                     JOptionPane.showMessageDialog(null, "User dengan nama " + name + " dan nomor hp " + phone + " sudah ada!", 
                                                 "Registration Failed", JOptionPane.ERROR_MESSAGE);
                 }
-                clearFields();
-                MainFrame.getInstance().navigateTo(HomeGUI.KEY);
+                clearFields();                                                  // Mengosongkan semua input field
+                MainFrame.getInstance().navigateTo(HomeGUI.KEY);                // Kembali ke page HomeGUI
             }
         }
     }
 
+    /**
+     * Method untuk mengosongkan input field
+     **/
     private void clearFields() {
         nameTextField.setText("");
         phoneTextField.setText("");
         passwordField.setText("");
+        showPasswordCheckBox.setSelected(false);
+        passwordField.setEchoChar('•');
     }
 
+    /**
+     * Method untuk mengecek apakah suatu string hanya terdiri dari angka atau tidak
+     * 
+     * @param str string yang akan diperiksa
+     * @return true jika string hanya terdiri dari angka, false jika tidak
+     **/
     private boolean isNumeric(String str) {
         Pattern pattern = Pattern.compile("^[0-9]+$");
         return pattern.matcher(str).matches();

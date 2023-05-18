@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
     private MainFrame() {
         super("CuciCuciSystem");
 
+        // Menambahkan employee baru CuciCuci
         employeeSystem.addEmployee(new Employee[] {
                 new Employee("delta Epsilon Huha Huha", "ImplicitDiff"),
                 new Employee("Regret", "FansBeratKanaArima"),
@@ -57,9 +58,7 @@ public class MainFrame extends JFrame {
 
     /**
      * Method untuk menginisialisasi GUI.
-     * Selama funsionalitas sesuai dengan soal, tidak apa apa tidak 100% sama.
-     * Be creative and have fun!
-     * */
+     **/
     private void initGUI() {
         mainPanel.add(homeGUI, HomeGUI.KEY);
         mainPanel.add(registerGUI, RegisterGUI.KEY);
@@ -74,7 +73,7 @@ public class MainFrame extends JFrame {
      * Instance Class MainFrame harus diambil melalui method ini agar menjamin hanya terdapat satu Frame pada program.
      *
      * @return instance dari class MainFrame
-     * */
+     **/
     public static MainFrame getInstance() {
         if (instance == null) {
             instance = new MainFrame();
@@ -86,7 +85,7 @@ public class MainFrame extends JFrame {
      * Method untuk pergi ke panel sesuai dengan yang diberikan pada param.
      *
      * @param page -> key dari halaman yang diinginkan.
-     * */
+     **/
     public void navigateTo(String page) {
         cards.show(mainPanel, page);
     }
@@ -100,7 +99,7 @@ public class MainFrame extends JFrame {
      * @param id -> ID dari pengguna
      * @param password -> password dari pengguna
      * @return boolean yang menandakan apakah login berhasil atau gagal.
-     * */
+     **/
     public boolean login(String id, String password) {
         for (Loginable panel : loginablePanel) {
             if (panel.login(id, password)) {
@@ -113,7 +112,7 @@ public class MainFrame extends JFrame {
 
     /**
      * Method untuk logout dari sistem, kemudian menampilkan halaman Home.
-     * */
+     **/
     public void logout() {
         for (Loginable panel : loginablePanel) {
             panel.logout();

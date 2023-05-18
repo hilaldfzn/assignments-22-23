@@ -31,7 +31,7 @@ public class MemberSystemGUI extends AbstractMemberGUI {
      * Button yang disediakan method ini BELUM memiliki ActionListener.
      *
      * @return Array of JButton, berisi button yang sudah stylize namun belum ada ActionListener.
-     * */
+     **/
     @Override
     protected JButton[] createButtons() {
         JButton createNotaButton = new JButton("Saya ingin laundry");
@@ -48,7 +48,7 @@ public class MemberSystemGUI extends AbstractMemberGUI {
      * sesuai dengan requirements MemberSystem.
      *
      * @return Array of ActionListener.
-     * */
+     **/
     @Override
     protected ActionListener[] createActionListeners() {
         return new ActionListener[] {
@@ -60,32 +60,34 @@ public class MemberSystemGUI extends AbstractMemberGUI {
     /**
      * Menampilkan detail Nota milik loggedInMember.
      * Akan dipanggil jika pengguna menekan button pertama pada createButtons
-     * */
+     **/
     private void showDetailNota() {
+        StringBuilder sb = new StringBuilder();
         if (loggedInMember.getNotaList().length != 0) {
-            StringBuilder sb = new StringBuilder();
             for (Nota nota : loggedInMember.getNotaList()) {
                 sb.append(String.format("%s%n", nota.toString()));
             }
-
-            JTextArea textArea = new JTextArea(sb.toString());
-            textArea.setFont(new Font("monospaced", Font.PLAIN, 12));
-            textArea.setLineWrap(true);
-            textArea.setWrapStyleWord(true);
-            textArea.setEditable(false);
-
-            JScrollPane scrollPane = new JScrollPane(textArea);
-            scrollPane.setPreferredSize(new Dimension(500, 300));
-            JOptionPane.showMessageDialog(null, scrollPane, "Detail Nota", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Member belum memiliki nota!", "Nota Not Found", JOptionPane.INFORMATION_MESSAGE);
+            sb.append("Belum pernah laundry di CuciCuci. hiks :(");
         }
+
+        // Text area untuk menampung semua detail nota member
+        JTextArea textArea = new JTextArea(sb.toString());
+        textArea.setFont(new Font("monospaced", Font.PLAIN, 12));
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+
+        // Menjadikan text area dapat discroll
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(500, 300));
+        JOptionPane.showMessageDialog(null, scrollPane, "Detail Nota", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
      * Pergi ke halaman CreateNotaGUI.
      * Akan dipanggil jika pengguna menekan button kedua pada createButtons
-     * */
+     **/
     private void createNota() {
         MainFrame.getInstance().navigateTo(CreateNotaGUI.KEY);
     }

@@ -18,12 +18,14 @@ public class LoginGUI extends JPanel {
     private JButton loginButton;
     private JButton backButton;
     private LoginManager loginManager;
+    private JCheckBox showPasswordCheckBox;
 
     public LoginGUI(LoginManager loginManager) {
-        super(new BorderLayout()); // Setup layout, Feel free to make any changes
+        // Setup layout
+        super(new BorderLayout());                      
         this.loginManager = loginManager;
 
-        // Set up main panel, Feel free to make any changes
+        // Set up main panel
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -34,53 +36,66 @@ public class LoginGUI extends JPanel {
 
     /**
      * Method untuk menginisialisasi GUI.
-     * Selama funsionalitas sesuai dengan soal, tidak apa apa tidak 100% sama.
-     * Be creative and have fun!
-     * */
+     * Pada page ini terdapat dua field yang harus diisi dan dua button
+     * Field: ID dan Password
+     * Button: Kembali dan Login
+     **/
     private void initGUI() {
-        idLabel = new JLabel("ID");
-        idTextField = new JTextField(20);
-
-        passwordLabel = new JLabel("Password");
-        passwordField = new JPasswordField(20);
-
-        loginButton = new JButton("Login");
-        loginButton.addActionListener(e -> handleLogin());
-
-        backButton = new JButton("Kembali");
-        backButton.addActionListener(e -> handleBack());
-
         GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(5, 5, 5, 5);
+
+        // Label dan text field untuk ID
+        idLabel = new JLabel("ID");
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = new Insets(5, 0, 5, 0);
         mainPanel.add(idLabel, constraints);
 
+        idTextField = new JTextField(20);
         constraints.gridx = 1;
         mainPanel.add(idTextField, constraints);
 
+        // Label dan password untuk Password
+        passwordLabel = new JLabel("Password");
         constraints.gridx = 0;
         constraints.gridy = 1;
         mainPanel.add(passwordLabel, constraints);
 
+        passwordField = new JPasswordField(20);
         constraints.gridx = 1;
         mainPanel.add(passwordField, constraints);
 
-        constraints.gridx = 0;
+        // Checkbox untuk menampilkan atau menyembunyikan password
+        showPasswordCheckBox = new JCheckBox("Show Password");
+        showPasswordCheckBox.setFont(new Font("Arial", Font.PLAIN, 10));
+        showPasswordCheckBox.addActionListener(e -> {
+            JCheckBox checkBox = (JCheckBox) e.getSource();
+            passwordField.setEchoChar(checkBox.isSelected() ? '\u0000' : '•');
+        });
+        constraints.gridx = 1;
         constraints.gridy = 2;
+        constraints.anchor = GridBagConstraints.WEST;
+        mainPanel.add(showPasswordCheckBox, constraints);
+
+        // Button Login dan Kembali beserta action listenernya
+        loginButton = new JButton("Login");
+        loginButton.addActionListener(e -> handleLogin());
+        constraints.gridx = 0;
+        constraints.gridy = 3;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         mainPanel.add(loginButton, constraints);
 
-        constraints.gridy = 3;
+        backButton = new JButton("Kembali");
+        backButton.addActionListener(e -> handleBack());
+        constraints.gridy = 4;
         mainPanel.add(backButton, constraints);
     }
 
     /**
      * Method untuk kembali ke halaman home.
      * Akan dipanggil jika pengguna menekan "backButton"
-     * */
+     **/
     private void handleBack() {
         MainFrame.getInstance().navigateTo(HomeGUI.KEY);
         clearFields();
@@ -89,33 +104,40 @@ public class LoginGUI extends JPanel {
     /**
      * Method untuk login pada sistem.
      * Akan dipanggil jika pengguna menekan "loginButton"
-     * */
+     **/
     private void handleLogin() {
         String id = idTextField.getText();
         String password = new String(passwordField.getPassword());
 
+        // Akan menampilkan error message ketika masih ada field yang kosong
         if (id.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Field ID dan Password wajib diisi!", "Empty Field", JOptionPane.ERROR_MESSAGE);
         } else {
-            SystemCLI userSystem = loginManager.getSystem(id);
-
+            SystemCLI userSystem = loginManager.getSystem(id);          // Membuat objek userSystem
+            
+            // Jika input ID salah, tidak akan ada objek userSystem (null)
             if (userSystem == null) {
-                JOptionPane.showMessageDialog(null, "Invalid ID or Password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid ID or Password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
             } else {
-                Member userLogin = userSystem.authUser(id, password);
+                Member userLogin = userSystem.authUser(id, password);   // Membuat objek userLogin
 
                 if (userLogin == null) {
-                    JOptionPane.showMessageDialog(null, "Invalid ID or Password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid ID or Password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    MainFrame.getInstance().login(id, password);
+                    MainFrame.getInstance().login(id, password);        // User akan login dan ditujukan ke page member system atau employee system
                 }
             }
         }
-        clearFields();
+        clearFields();                                                  // Mengosongkan semua field setelah melakukan login
     }
 
+    /**
+     * Method untuk mengosongkan input field
+     **/
     private void clearFields() {
         idTextField.setText("");
         passwordField.setText("");
+        showPasswordCheckBox.setSelected(false);
+        passwordField.setEchoChar('•');
     }
 }
