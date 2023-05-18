@@ -87,4 +87,4 @@ public class EmployeeSystemGUI extends AbstractMemberGUI {
             JOptionPane.showMessageDialog(null, "Nothing to cuci here", "Nyuci Results", JOptionPane.ERROR_MESSAGE);
         }
     }
-}
+}   

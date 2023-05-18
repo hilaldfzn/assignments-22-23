@@ -159,4 +159,4 @@ public class RegisterGUI extends JPanel {
         Pattern pattern = Pattern.compile("^[0-9]+$");
         return pattern.matcher(str).matches();
     }
-}
+}   

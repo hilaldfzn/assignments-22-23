@@ -128,4 +128,4 @@ public class LoginGUI extends JPanel {
         idTextField.setText("");
         passwordField.setText("");
     }
-}
+}   

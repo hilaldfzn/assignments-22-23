@@ -127,4 +127,4 @@ public class MainFrame extends JFrame {
         // Tapi in general kalian tidak usah terlalu overthinking line ini selain fungsi utamanya adalah menampilkan GUI
         SwingUtilities.invokeLater(MainFrame::getInstance);
     }
-}
+}   

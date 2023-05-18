@@ -125,4 +125,4 @@ public abstract class AbstractMemberGUI extends JPanel implements Loginable {
      * @return Array of ActionListener.
      **/
     protected abstract ActionListener[] createActionListeners();
-}
+}   

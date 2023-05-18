@@ -91,4 +91,4 @@ public class MemberSystemGUI extends AbstractMemberGUI {
     private void createNota() {
         MainFrame.getInstance().navigateTo(CreateNotaGUI.KEY);
     }
-}
+}   

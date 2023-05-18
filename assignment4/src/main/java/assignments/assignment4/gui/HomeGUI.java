@@ -101,4 +101,4 @@ public class HomeGUI extends JPanel {
         dateLabel.setText("Hari ini: " + NotaManager.fmt.format(NotaManager.cal.getTime()));
         JOptionPane.showMessageDialog(null, "Kamu tidur hari ini... zzz...", "Day Changed", JOptionPane.INFORMATION_MESSAGE);
     }
-}
+}   

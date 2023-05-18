@@ -207,4 +207,4 @@ public class CreateNotaGUI extends JPanel {
         setrikaCheckBox.setSelected(false);
         antarCheckBox.setSelected(false);
     }
-}
+}   
