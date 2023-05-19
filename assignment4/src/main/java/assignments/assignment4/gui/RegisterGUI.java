@@ -21,6 +21,7 @@ public class RegisterGUI extends JPanel {
     private JButton registerButton;
     private LoginManager loginManager;
     private JButton backButton;
+    private JCheckBox showPasswordCheckBox;
 
     public RegisterGUI(LoginManager loginManager) {
         // Setup layout
@@ -55,7 +56,6 @@ public class RegisterGUI extends JPanel {
 
         nameTextField = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 0;
         mainPanel.add(nameTextField, constraints);
 
         // Label dan text field untuk Nomor Handphone
@@ -66,7 +66,6 @@ public class RegisterGUI extends JPanel {
 
         phoneTextField = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 1;
         mainPanel.add(phoneTextField, constraints);
 
         // Label dan password field untuk Password
@@ -77,22 +76,32 @@ public class RegisterGUI extends JPanel {
 
         passwordField = new JPasswordField(20);
         constraints.gridx = 1;
-        constraints.gridy = 2;
         mainPanel.add(passwordField, constraints);
+
+        // Checkbox untuk menampilkan atau menyembunyikan password
+        showPasswordCheckBox = new JCheckBox("Show Password");
+        showPasswordCheckBox.setFont(new Font("Arial", Font.PLAIN, 10));
+        showPasswordCheckBox.addActionListener(e -> {
+            JCheckBox checkBox = (JCheckBox) e.getSource();
+            passwordField.setEchoChar(checkBox.isSelected() ? '\u0000' : '\u2022');
+        });
+        constraints.gridx = 1;
+        constraints.gridy = 3;
+        constraints.anchor = GridBagConstraints.WEST;
+        mainPanel.add(showPasswordCheckBox, constraints);
 
         // Button Register dan Kembali beserta action listenernya
         registerButton = new JButton("Register");
         registerButton.addActionListener(e -> handleRegister());
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         mainPanel.add(registerButton, constraints);
 
         backButton = new JButton("Kembali");
         backButton.addActionListener(e -> handleBack());
-        constraints.gridx = 0;
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         mainPanel.add(backButton, constraints);
     }
 
@@ -147,6 +156,8 @@ public class RegisterGUI extends JPanel {
         nameTextField.setText("");
         phoneTextField.setText("");
         passwordField.setText("");
+        showPasswordCheckBox.setSelected(false);
+        passwordField.setEchoChar('\u2022');
     }
 
     /**
@@ -159,4 +170,4 @@ public class RegisterGUI extends JPanel {
         Pattern pattern = Pattern.compile("^[0-9]+$");
         return pattern.matcher(str).matches();
     }
-}   
+}

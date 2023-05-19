@@ -18,6 +18,7 @@ public class LoginGUI extends JPanel {
     private JButton loginButton;
     private JButton backButton;
     private LoginManager loginManager;
+    private JCheckBox showPasswordCheckBox;
 
     public LoginGUI(LoginManager loginManager) {
         // Setup layout
@@ -52,7 +53,6 @@ public class LoginGUI extends JPanel {
 
         idTextField = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 0;
         mainPanel.add(idTextField, constraints);
 
         // Label dan password untuk Password
@@ -63,22 +63,32 @@ public class LoginGUI extends JPanel {
 
         passwordField = new JPasswordField(20);
         constraints.gridx = 1;
-        constraints.gridy = 1;
         mainPanel.add(passwordField, constraints);
+
+        // Checkbox untuk menampilkan atau menyembunyikan password
+        showPasswordCheckBox = new JCheckBox("Show Password");
+        showPasswordCheckBox.setFont(new Font("Arial", Font.PLAIN, 10));
+        showPasswordCheckBox.addActionListener(e -> {
+            JCheckBox checkBox = (JCheckBox) e.getSource();
+            passwordField.setEchoChar(checkBox.isSelected() ? '\u0000' : '\u2022');
+        });
+        constraints.gridx = 1;
+        constraints.gridy = 2;
+        constraints.anchor = GridBagConstraints.WEST;
+        mainPanel.add(showPasswordCheckBox, constraints);
 
         // Button Login dan Kembali beserta action listenernya
         loginButton = new JButton("Login");
         loginButton.addActionListener(e -> handleLogin());
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         mainPanel.add(loginButton, constraints);
 
         backButton = new JButton("Kembali");
         backButton.addActionListener(e -> handleBack());
-        constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         mainPanel.add(backButton, constraints);
     }
 
@@ -127,5 +137,7 @@ public class LoginGUI extends JPanel {
     private void clearFields() {
         idTextField.setText("");
         passwordField.setText("");
+        showPasswordCheckBox.setSelected(false);
+        passwordField.setEchoChar('\u2022');
     }
-}   
+}
